@@ -14,10 +14,9 @@ class SiteFooter extends HTMLElement {
             <div class="footer-links">
               <h4>바로가기</h4>
               <ul>
-                <li><a href="#">알고리즘</a></li>
-                <li><a href="#">문제 풀이</a></li>
-                <li><a href="#">학습 가이드</a></li>
-                <li><a href="#">커뮤니티</a></li>
+                <li><a href="algorithms.html">알고리즘</a></li>
+                <li><a href="solutions.html">문제 풀이</a></li>
+                <li><a href="about.html">정보</a></li>
               </ul>
             </div>
           </div>

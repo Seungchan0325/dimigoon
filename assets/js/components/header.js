@@ -8,9 +8,9 @@ class SiteHeader extends HTMLElement {
         </a>
         <nav class="header-navs">
           <ul class="header-nav-list">
-            <li><a href="#" class="header-nav">Algorithms</a></li>
-            <li><a href="#" class="header-nav">Solutions</a></li>
-            <li><a href="#" class="header-nav">About</a></li>
+            <li><a href="algorithms.html" class="header-nav">Algorithms</a></li>
+            <li><a href="solutions.html" class="header-nav">Solutions</a></li>
+            <li><a href="about.html" class="header-nav">About</a></li>
           </ul>
         </nav>
       </header>
