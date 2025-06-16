@@ -1,0 +1,78 @@
+/* main page hero section */
+
+.hero-section {
+  text-align: center;
+  padding: 80px 20px;
+  background: url('../img/hero-background.jpg') no-repeat center center / cover;
+  backdrop-filter: blur(3px);
+  position: relative;
+  transition: all 0.3s ease;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+body.dark-mode .hero-section {
+  background: url('../img/dark-hero-background.jpg') no-repeat center center / cover;
+}
+
+body.dark-mode .hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+body.dark-mode .hero-section > * {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-slogan {
+  font-size: 2rem;
+  margin-bottom: 60px;
+  font-weight: 600;
+}
+
+.hero-hero-cards {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.hero-card {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  padding: 40px 30px;
+  width: 250px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+body.dark-mode .hero-card {
+  background: rgba(45, 45, 45, 0.9);
+  color: var(--text-primary);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.hero-card:hover {
+  transform: translateY(-10px);
+}
+
+.hero-card-icon {
+  width: 5rem;
+  height: 5rem;
+  margin-bottom: 20px;
+}
+
+.hero-card p {
+  font-size: 1rem;
+  line-height: 1.5;
+}

@@ -1,0 +1,229 @@
+/* Responsive Design */
+
+/* 일반적인 반응형 유틸리티 */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 30px;
+  }
+  
+  .hero-section {
+    padding: 80px 2rem;
+  }
+  
+  .hero-title {
+    font-size: 3rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-title {
+    font-size: 2.5rem;
+  }
+  
+  .about-subtitle {
+    font-size: 1.3rem;
+  }
+  
+  .activities-title, .values-title, .meaning-title {
+    font-size: 2rem;
+  }
+  
+  .about-hero {
+    padding: 60px 1rem 50px;
+  }
+  
+  .about-meaning, .about-activities, .about-values {
+    padding: 60px 1rem;
+  }
+  
+  .complexity-explanation {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2rem;
+  }
+  
+  .complexity-graph {
+    width: 150px;
+    height: 120px;
+  }
+  
+  .naming-philosophy {
+    padding: 2rem;
+  }
+  
+  .philosophy-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .algorithms-page .container {
+    padding: 0 15px;
+  }
+  
+  .page-title {
+    font-size: 2.5rem;
+  }
+  
+  .tier-navigator {
+    gap: 0.5rem;
+    padding: 1.5rem 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .tier-btn {
+    padding: 1rem 1.5rem;
+    min-width: 100px;
+  }
+  
+  .tier-icon {
+    font-size: 1.5rem;
+    width: 2rem;
+    height: 2rem;
+  }
+  
+  .title-icon {
+    width: 2rem;
+    height: 2rem;
+  }
+  
+  .tier-name {
+    font-size: 0.8rem;
+  }
+  
+  .difficulty-section {
+    padding: 2rem 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .difficulty-title {
+    font-size: 2rem;
+  }
+  
+  .category-title {
+    font-size: 1.5rem;
+  }
+  
+  .timeline {
+    padding-left: 1.5rem;
+  }
+  
+  .timeline-item {
+    padding-left: 1.5rem;
+  }
+  
+  .timeline-marker {
+    left: -1.25rem;
+  }
+  
+  .timeline-content {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 2rem;
+  }
+  
+  .tier-navigator {
+    justify-content: center;
+    gap: 0.3rem;
+  }
+  
+  .tier-btn {
+    padding: 0.8rem 1rem;
+    min-width: 80px;
+  }
+  
+  .tier-icon {
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  
+  .title-icon {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+  
+  .tier-name {
+    font-size: 0.7rem;
+  }
+  
+  .difficulty-title {
+    font-size: 1.8rem;
+  }
+  
+  .category-title {
+    font-size: 1.3rem;
+    padding: 0.8rem;
+  }
+  
+  /* 공통 반응형 개선 */
+  .hero-section {
+    padding: 50px 1rem;
+  }
+  
+  .hero-title {
+    font-size: 2.2rem;
+    line-height: 1.3;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .btn-primary {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .container {
+    padding: 0 10px;
+  }
+}
+
+/* 큰 화면 최적화 */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .hero-title {
+    font-size: 4rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.3rem;
+  }
+}
+
+/* 초소형 화면 추가 최적화 */
+@media (max-width: 320px) {
+  .hero-title {
+    font-size: 1.8rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.9rem;
+  }
+  
+  .page-title {
+    font-size: 1.8rem;
+  }
+  
+  .tier-btn {
+    padding: 0.6rem 0.8rem;
+    min-width: 70px;
+  }
+  
+  .tier-name {
+    font-size: 0.65rem;
+  }
+}
