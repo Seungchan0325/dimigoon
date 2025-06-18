@@ -325,17 +325,109 @@
   padding: 2rem;
   transition: all 0.3s ease;
   position: relative;
+  display: block;
+  text-decoration: none;
+  color: inherit;
 }
 
 .olympiad-card:not(.disabled):hover {
   border-color: var(--accent-primary);
   transform: translateY(-4px);
   box-shadow: 0 8px 25px rgba(0, 123, 255, 0.1);
+  text-decoration: none;
+  color: inherit;
 }
 
 .olympiad-card.disabled {
   opacity: 0.6;
   background: var(--bg-secondary);
+}
+
+.olympiad-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.olympiad-card-header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.olympiad-icon {
+  font-size: 1.2em;
+}
+
+.olympiad-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: flex-end;
+}
+
+.problem-count {
+  background: var(--accent-primary);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.year-range {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
+.olympiad-card-body {
+  margin-bottom: 1.5rem;
+}
+
+.olympiad-description {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.year-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.year-badge {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.more-years {
+  background: var(--accent-secondary);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.olympiad-card-footer {
+  text-align: right;
+}
+
+.view-problems {
+  color: var(--accent-primary);
+  font-weight: 500;
+  font-size: 0.9rem;
 }
 
 .olympiad-header h2 {
@@ -1729,6 +1821,179 @@ body.dark-mode .highlight .na {
 /* Constants - purple */
 body.dark-mode .highlight .no, body.dark-mode .highlight .kc {
   color: #ae81ff;
+}
+
+/* Recent Problems Section */
+.recent-problems {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+
+.recent-problems h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.recent-problems .problem-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+  display: block;
+}
+
+.recent-problems .problem-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow-medium);
+  border-color: var(--accent-primary);
+  text-decoration: none;
+  color: inherit;
+}
+
+.recent-problems .problem-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.recent-problems .problem-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.recent-problems .problem-difficulty-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.recent-problems .problem-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+.recent-problems .problem-olympiad {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.recent-problems .problem-points {
+  color: var(--accent-success);
+  font-weight: 600;
+}
+
+.recent-problems .problem-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.recent-problems .tag {
+  background: var(--accent-primary);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.recent-problems .tag.more {
+  background: var(--text-tertiary);
+}
+
+/* Statistics Section */
+.statistics {
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+}
+
+.statistics h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.5rem;
+}
+
+.stat-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 2rem 1rem;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow-light);
+  border-color: var(--accent-primary);
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .olympiad-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .olympiad-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .olympiad-stats {
+    align-items: flex-start;
+  }
+  
+  .problem-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 /* Generic names - white */
 body.dark-mode .highlight .nn, body.dark-mode .highlight .nx, body.dark-mode .highlight .py, body.dark-mode .highlight .ni, body.dark-mode .highlight .ne, body.dark-mode .highlight .nl {

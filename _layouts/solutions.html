@@ -2,82 +2,148 @@
 layout: default
 ---
 
-<div class="solutions-page">
+<div class="solutions-index">
   <div class="container">
+    <!-- 페이지 헤더 -->
     <div class="page-header">
       <h1>{{ page.title | default: "정보 올림피아드 문제 풀이" }}</h1>
       <p>{{ page.description | default: "다양한 정보 올림피아드 대회의 문제와 해설을 확인하세요" }}</p>
     </div>
 
-    <!-- 올림피아드 분류 선택 -->
-    <div class="olympiad-selector">
-      <h2>대회 분류 선택</h2>
-      <div class="selector-buttons" role="tablist" aria-label="올림피아드 분류">
-        {% assign olympiads = site.data.olympiads %}
-        {% assign sorted_keys = "apio,ioi,koi,koi-selection,usaco,joi,boi,baltoi" | split: "," %}
-        {% for key in sorted_keys %}
-          {% assign olympiad = olympiads[key] %}
-          {% if olympiad %}
-            <button class="selector-btn{% if forloop.first %} active{% endif %}" 
-                    data-olympiad="{{ key }}" 
-                    role="tab" 
-                    aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
-              {{ olympiad.title }}
-            </button>
-          {% endif %}
+    <!-- 올림피아드 목록 -->
+    <div class="olympiad-grid">
+      {% assign olympiads = site.solutions | map: 'olympiad' | uniq | sort %}
+      {% for olympiad in olympiads %}
+        {% if olympiad %}
+          {% assign olympiad_solutions = site.solutions | where: 'olympiad', olympiad %}
+          {% assign years = olympiad_solutions | map: 'year' | uniq | sort | reverse %}
+          {% assign total_problems = olympiad_solutions.size %}
+          
+          <a href="{{ olympiad }}.html" class="olympiad-card">
+            <div class="olympiad-card-header">
+              <h2>
+                {% case olympiad %}
+                  {% when 'apio' %}
+                    <span class="olympiad-icon">🌏</span>
+                    APIO
+                  {% when 'koi' %}
+                    <span class="olympiad-icon">🇰🇷</span>
+                    KOI
+                  {% when 'ioi' %}
+                    <span class="olympiad-icon">🏆</span>
+                    IOI
+                  {% when 'usaco' %}
+                    <span class="olympiad-icon">🇺🇸</span>
+                    USACO
+                  {% else %}
+                    <span class="olympiad-icon">🏆</span>
+                    {{ olympiad | upcase }}
+                {% endcase %}
+              </h2>
+              <div class="olympiad-stats">
+                <span class="problem-count">{{ total_problems }}문제</span>
+                {% if years.size > 1 %}
+                  <span class="year-range">{{ years.last }} - {{ years.first }}</span>
+                {% else %}
+                  <span class="year-range">{{ years.first }}</span>
+                {% endif %}
+              </div>
+            </div>
+            
+            <div class="olympiad-card-body">
+              <p class="olympiad-description">
+                {% case olympiad %}
+                  {% when 'apio' %}
+                    아시아-태평양 정보 올림피아드는 아시아-태평양 지역 학생들을 위한 국제 프로그래밍 대회입니다.
+                  {% when 'koi' %}
+                    한국정보올림피아드는 대한민국의 대표적인 정보 올림피아드 대회입니다.
+                  {% when 'ioi' %}
+                    국제정보올림피아드는 세계 최고 수준의 정보 올림피아드 대회입니다.
+                  {% when 'usaco' %}
+                    미국정보올림피아드는 미국의 대표적인 정보 올림피아드 대회입니다.
+                  {% else %}
+                    {{ olympiad | upcase }} 정보 올림피아드 문제 풀이 모음입니다.
+                {% endcase %}
+              </p>
+              
+              <div class="year-preview">
+                {% for year in years limit: 3 %}
+                  {% assign year_problems = olympiad_solutions | where: 'year', year %}
+                  <span class="year-badge">
+                    {{ year }} ({{ year_problems.size }}문제)
+                  </span>
+                {% endfor %}
+                {% if years.size > 3 %}
+                  <span class="more-years">+{{ years.size | minus: 3 }}개 년도</span>
+                {% endif %}
+              </div>
+            </div>
+            
+            <div class="olympiad-card-footer">
+              <span class="view-problems">문제 풀이 보기 →</span>
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <!-- 최근 추가된 문제 -->
+    <div class="recent-problems">
+      <h2>최근 추가된 문제 풀이</h2>
+      <div class="problem-grid">
+        {% assign recent_problems = site.solutions | sort: 'date' | reverse | limit: 6 %}
+        {% for problem in recent_problems %}
+          <a href="{{ problem.url }}" class="problem-card">
+            <div class="problem-card-header">
+              <h3 class="problem-title">{{ problem.title }}</h3>
+              <span class="problem-difficulty-badge difficulty-{{ problem.difficulty | downcase }}">
+                {{ problem.difficulty }}
+              </span>
+            </div>
+            <div class="problem-meta">
+              <span class="problem-olympiad">{{ problem.olympiad | upcase }} {{ problem.year }}</span>
+              <span class="problem-points">{{ problem.points }}점</span>
+            </div>
+            {% if problem.tags %}
+              <div class="problem-tags">
+                {% for tag in problem.tags limit: 2 %}
+                  <span class="tag">{{ tag }}</span>
+                {% endfor %}
+                {% if problem.tags.size > 2 %}
+                  <span class="tag more">+{{ problem.tags.size | minus: 2 }}</span>
+                {% endif %}
+              </div>
+            {% endif %}
+          </a>
         {% endfor %}
       </div>
     </div>
 
-    <!-- 올림피아드 섹션들 -->
-    {% for key in sorted_keys %}
-      {% assign olympiad = olympiads[key] %}
-      {% if olympiad %}
-        <section class="olympiad-section" id="{{ key }}-section"{% unless forloop.first %} style="display: none;"{% endunless %}>
-          <div class="olympiad-header">
-            <h2>{{ olympiad.title }}</h2>
-            <p>{{ olympiad.description }}</p>
-          </div>
-          
-          <div class="timeline-container" role="tabpanel" aria-labelledby="current-olympiad-title">
-            {% assign contests = olympiad.contests | sort: "year" | reverse %}
-            {% if contests.size > 0 %}
-              <div class="timeline">
-                {% for contest in contests %}
-                  <div class="timeline-item" 
-                       data-contest-id="{{ contest.contestId }}"
-                       role="button"
-                       tabindex="0"
-                       aria-label="{{ contest.title }} 문제 보기">
-                    <div class="timeline-year">{{ contest.year }}</div>
-                    <div class="timeline-title">{{ contest.title }}</div>
-                    {% if contest.location %}
-                      <div class="timeline-location">{{ contest.location }}</div>
-                    {% endif %}
-                    {% if contest.description %}
-                      <div class="timeline-description">{{ contest.description }}</div>
-                    {% endif %}
-                    {% if contest.problemCount %}
-                      <div class="timeline-problems-count">{{ contest.problemCount }}개 문제</div>
-                    {% endif %}
-                  </div>
-                {% endfor %}
-              </div>
-            {% else %}
-              <div class="timeline-empty">
-                <h3>데이터가 없습니다</h3>
-                <p>해당 대회의 정보를 찾을 수 없습니다.</p>
-              </div>
-            {% endif %}
-          </div>
-        </section>
-      {% endif %}
-    {% endfor %}
-
-    <!-- 숨겨진 데이터 (JavaScript에서 사용) -->
-    <script id="olympiad-data" type="application/json">
-      {{ site.data.olympiads | jsonify }}
-    </script>
+    <!-- 통계 정보 -->
+    <div class="statistics">
+      <h2>통계</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">{{ site.solutions.size }}</div>
+          <div class="stat-label">총 문제 수</div>
+        </div>
+        <div class="stat-card">
+          {% assign total_olympiads = site.solutions | map: 'olympiad' | uniq | size %}
+          <div class="stat-number">{{ total_olympiads }}</div>
+          <div class="stat-label">올림피아드</div>
+        </div>
+        <div class="stat-card">
+          {% assign total_years = site.solutions | map: 'year' | uniq | size %}
+          <div class="stat-number">{{ total_years }}</div>
+          <div class="stat-label">년도</div>
+        </div>
+        <div class="stat-card">
+          {% assign all_tags = site.solutions | map: 'tags' | join: ',' | split: ',' | uniq | size %}
+          <div class="stat-number">{{ all_tags }}</div>
+          <div class="stat-label">알고리즘 태그</div>
+        </div>
+      </div>
+    </div>
 
     {{ content }}
   </div>
