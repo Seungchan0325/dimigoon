@@ -2616,3 +2616,169 @@ body.dark-mode .footer-bottom {
     font-size: 0.65rem;
   }
 }
+
+/* Related Problems Section */
+.related-problems {
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 8px var(--shadow-light);
+}
+
+.related-problems h3 {
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  font-weight: 600;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--accent-primary);
+}
+
+.related-problems .problem-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.related-problems .problem-card {
+  margin-bottom: 1rem;
+  padding: 1.25rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+  display: block;
+}
+
+.related-problems .problem-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow-medium);
+  border-color: var(--accent-primary);
+}
+
+.related-problems .problem-card-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.related-problems .problem-card-content {
+  flex: 1;
+}
+
+.related-problems .problem-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+  gap: 1rem;
+}
+
+.related-problems .problem-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.related-problems .problem-difficulty-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.related-problems .problem-card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  gap: 1rem;
+}
+
+.related-problems .problem-points {
+  font-weight: 500;
+  color: var(--accent-success);
+}
+
+.related-problems .problem-id {
+  color: var(--text-tertiary);
+}
+
+.related-problems .problem-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.related-problems .problem-tag {
+  padding: 0.25rem 0.5rem;
+  background: var(--accent-primary);
+  color: white;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.related-problems .problem-tag.more-tags {
+  background: var(--text-tertiary);
+}
+
+.related-problems .problem-card-arrow {
+  align-self: center;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--accent-primary);
+  margin-left: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.related-problems .problem-card:hover .problem-card-arrow {
+  transform: translateX(4px);
+}
+
+/* Responsive adjustments for related problems */
+@media (max-width: 768px) {
+  .related-problems {
+    margin-top: 2rem;
+    padding: 1.5rem;
+  }
+  
+  .related-problems .problem-list {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .related-problems .problem-card {
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .related-problems .problem-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .related-problems .problem-difficulty-badge {
+    align-self: flex-start;
+  }
+  
+  .related-problems .problem-card-tags {
+    margin-top: 0.5rem;
+  }
+  
+  .related-problems .problem-card-arrow {
+    margin-left: 0.5rem;
+    font-size: 1rem;
+  }
+}
