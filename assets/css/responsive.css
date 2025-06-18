@@ -63,23 +63,20 @@
     padding: 0 15px;
   }
   
-  .page-title {
-    font-size: 2.5rem;
+  .page-header h1 {
+    font-size: 2.2rem;
   }
   
-  .tier-navigator {
+  .tier-buttons {
     gap: 0.5rem;
-    padding: 1.5rem 1rem;
-    margin-bottom: 2rem;
   }
   
   .tier-btn {
-    padding: 1rem 1.5rem;
+    padding: 0.8rem 1.2rem;
     min-width: 100px;
   }
   
   .tier-icon {
-    font-size: 1.5rem;
     width: 2rem;
     height: 2rem;
   }
@@ -94,16 +91,16 @@
   }
   
   .difficulty-section {
-    padding: 2rem 1.5rem;
+    padding: 1.5rem;
     margin-bottom: 2rem;
   }
   
-  .difficulty-title {
-    font-size: 2rem;
+  .difficulty-title h2 {
+    font-size: 1.4rem;
   }
   
   .category-title {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
   
   .timeline {
@@ -124,42 +121,41 @@
 }
 
 @media (max-width: 480px) {
-  .page-title {
-    font-size: 2rem;
+  .page-header h1 {
+    font-size: 1.8rem;
   }
   
-  .tier-navigator {
+  .tier-buttons {
     justify-content: center;
     gap: 0.3rem;
   }
   
   .tier-btn {
-    padding: 0.8rem 1rem;
+    padding: 0.6rem 0.8rem;
     min-width: 80px;
   }
   
   .tier-icon {
-    font-size: 1.2rem;
-    margin-bottom: 0.3rem;
     width: 1.5rem;
     height: 1.5rem;
+    margin-bottom: 0.3rem;
   }
   
   .title-icon {
-    width: 1.8rem;
-    height: 1.8rem;
+    width: 1.5rem;
+    height: 1.5rem;
   }
   
   .tier-name {
     font-size: 0.7rem;
   }
   
-  .difficulty-title {
-    font-size: 1.8rem;
+  .difficulty-title h2 {
+    font-size: 1.2rem;
   }
   
   .category-title {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     padding: 0.8rem;
   }
   
@@ -214,8 +210,8 @@
     font-size: 0.9rem;
   }
   
-  .page-title {
-    font-size: 1.8rem;
+  .page-header h1 {
+    font-size: 1.6rem;
   }
   
   .tier-btn {

@@ -1,0 +1,85 @@
+<footer>
+  <div class="footer-content">
+    <!-- Footer Brand Section -->
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <img class="footer-logo-img" src="{{ "/assets/img/logo.svg" | relative_url }}" alt="DimigoOn Logo">
+        DimigoOn
+      </div>
+      <p class="footer-description">디미고 온라인 알고리즘 학습 플랫폼</p>
+      <p class="footer-tagline">체계적인 학습으로 알고리즘 마스터하기</p>
+      
+      <div class="footer-stats">
+        <div class="stat-item">
+          <span class="stat-number">6</span>
+          <span class="stat-label">난이도</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">50+</span>
+          <span class="stat-label">알고리즘</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">100+</span>
+          <span class="stat-label">문제</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Section -->
+    <div class="footer-section footer-navigation">
+      <h4 class="footer-title">바로가기</h4>
+      <nav class="footer-nav">
+        <a href="{{ "/algorithms/" | relative_url }}">알고리즘 학습</a>
+        <a href="{{ "/solutions/" | relative_url }}">문제 풀이</a>
+        <a href="{{ "/about/" | relative_url }}">사이트 소개</a>
+      </nav>
+    </div>
+
+    <!-- Resources Section -->
+    <div class="footer-section footer-resources">
+      <h4 class="footer-title">알고리즘 난이도</h4>
+      <nav class="footer-nav">
+        <a href="{{ "/algorithms/#bronze" | relative_url }}">Bronze</a>
+        <a href="{{ "/algorithms/#silver" | relative_url }}">Silver</a>
+        <a href="{{ "/algorithms/#gold" | relative_url }}">Gold</a>
+        <a href="{{ "/algorithms/#platinum" | relative_url }}">Platinum</a>
+        <a href="{{ "/algorithms/#diamond" | relative_url }}">Diamond</a>
+      </nav>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="footer-section footer-contact">
+      <h4 class="footer-title">연락처</h4>
+      <div class="contact-info">
+        <p class="contact-item">
+          <img class="contact-icon" src="{{ "/assets/img/mail-icon.svg" | relative_url }}" alt="Email">
+          <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+        </p>
+        <p class="contact-item">
+          <img class="contact-icon" src="{{ "/assets/img/school-icon.svg" | relative_url }}" alt="School">
+          <span>한국디지털미디어고등학교</span>
+        </p>
+      </div>
+      <div class="social-links">
+        {% if site.github_username %}
+        <a href="https://github.com/{{ site.github_username }}" class="social-link">
+          <img class="social-link-img" src="{{ "/assets/img/github-mark.svg" | relative_url }}" alt="GitHub">
+          GitHub
+        </a>
+        {% endif %}
+        {% if site.instagram_username %}
+        <a href="https://instagram.com/{{ site.instagram_username }}" class="social-link">
+          <img class="social-link-img" src="{{ "/assets/img/instagram-mark.svg" | relative_url }}" alt="Instagram">
+          Instagram
+        </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-bottom-content">
+      <p class="copyright">© {{ "now" | date: "%Y" }} DimigoOn. All rights reserved.</p>
+    </div>
+  </div>
+</footer>

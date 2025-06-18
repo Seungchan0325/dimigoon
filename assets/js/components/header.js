@@ -1,9 +1,14 @@
 class SiteHeader extends HTMLElement {
   connectedCallback() {
+    // 현재 페이지의 경로 깊이를 계산하여 상대 경로 설정
+    const pathDepth = window.location.pathname.split('/').filter(part => part !== '').length;
+    const basePath = pathDepth <= 1 ? '' : '../'.repeat(pathDepth - 1);
+    const rootPath = pathDepth === 0 ? './' : basePath;
+    
     this.innerHTML = `
       <header>
-        <a href="/" class="header-logo">
-          <img class="header-logo-img" src="assets/img/logo.svg">
+        <a href="${basePath}/" class="header-logo">
+          <img class="header-logo-img" src="${basePath}assets/img/logo.svg">
           DimigoOn
         </a>
         <div class="header-controls">
@@ -12,9 +17,9 @@ class SiteHeader extends HTMLElement {
           </button>
           <nav class="header-navs">
             <ul class="header-nav-list" id="navList">
-              <li><a href="algorithms.html" class="header-nav">Algorithms</a></li>
-              <li><a href="solutions.html" class="header-nav">Solutions</a></li>
-              <li><a href="about.html" class="header-nav">About</a></li>
+              <li><a href="${basePath}algorithms.html" class="header-nav">Algorithms</a></li>
+              <li><a href="${basePath}solutions.html" class="header-nav">Solutions</a></li>
+              <li><a href="${basePath}about.html" class="header-nav">About</a></li>
             </ul>
           </nav>
           <button class="dark-mode-toggle" id="darkModeToggle" aria-label="다크 모드 토글">
@@ -37,7 +42,7 @@ class SiteHeader extends HTMLElement {
       </header>
     `;
     
-    // 다크 모드 토글 기능 초기화
+    // 다크 모드 토글 기능 초기화 (웹 컴포넌트용)
     this.initDarkModeToggle();
     
     // 모바일 네비게이션 토글 기능 초기화
@@ -50,13 +55,17 @@ class SiteHeader extends HTMLElement {
     const moonIcon = this.querySelector('.moon-icon');
     const logoImg = this.querySelector('.header-logo-img');
     
+    // 현재 페이지의 경로 깊이를 계산하여 상대 경로 설정
+    const pathDepth = window.location.pathname.split('/').filter(part => part !== '').length;
+    const basePath = pathDepth <= 1 ? '' : '../'.repeat(pathDepth - 1);
+    
     // 저장된 다크 모드 설정 불러오기
     const isDarkMode = localStorage.getItem('darkMode') === 'true';
     if (isDarkMode) {
       document.body.classList.add('dark-mode');
       sunIcon.style.display = 'none';
       moonIcon.style.display = 'block';
-      logoImg.src = 'assets/img/logo-dark.svg';
+      logoImg.src = `${basePath}assets/img/logo-dark.svg`;
     }
     
     toggleBtn.addEventListener('click', () => {
@@ -67,11 +76,11 @@ class SiteHeader extends HTMLElement {
       if (isNowDark) {
         sunIcon.style.display = 'none';
         moonIcon.style.display = 'block';
-        logoImg.src = 'assets/img/logo-dark.svg';
+        logoImg.src = `${basePath}assets/img/logo-dark.svg`;
       } else {
         sunIcon.style.display = 'block';
         moonIcon.style.display = 'none';
-        logoImg.src = 'assets/img/logo.svg';
+        logoImg.src = `${basePath}assets/img/logo.svg`;
       }
       
       // 설정 저장
@@ -80,28 +89,102 @@ class SiteHeader extends HTMLElement {
   }
 
   initMobileNavToggle() {
-    const mobileToggle = this.querySelector('#mobileNavToggle');
+    const toggleBtn = this.querySelector('#mobileNavToggle');
     const navList = this.querySelector('#navList');
     
-    mobileToggle.addEventListener('click', () => {
+    toggleBtn.addEventListener('click', () => {
       navList.classList.toggle('active');
+      toggleBtn.setAttribute('aria-expanded', navList.classList.contains('active'));
     });
-
+    
     // 네비게이션 링크 클릭 시 메뉴 닫기
-    const navLinks = this.querySelectorAll('.header-nav');
+    const navLinks = navList.querySelectorAll('a');
     navLinks.forEach(link => {
       link.addEventListener('click', () => {
         navList.classList.remove('active');
+        toggleBtn.setAttribute('aria-expanded', 'false');
       });
-    });
-
-    // 화면 크기 변경 시 모바일 메뉴 닫기
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > 768) {
-        navList.classList.remove('active');
-      }
     });
   }
 }
 
+// 웹 컴포넌트 정의
 customElements.define('site-header', SiteHeader);
+
+// Jekyll 페이지에서 사용할 수 있도록 전역 함수로 export
+window.initHeaderFunctions = function() {
+  const toggleBtn = document.getElementById('darkModeToggle');
+  const mobileToggleBtn = document.getElementById('mobileNavToggle');
+  
+  if (toggleBtn) {
+    initDarkModeToggle();
+  }
+  
+  if (mobileToggleBtn) {
+    initMobileNavToggle();
+  }
+};
+
+// 다크모드 토글 기능 (일반 DOM용)
+function initDarkModeToggle() {
+  const toggleBtn = document.getElementById('darkModeToggle');
+  const sunIcon = document.querySelector('.sun-icon');
+  const moonIcon = document.querySelector('.moon-icon');
+  const logoImg = document.querySelector('.header-logo-img');
+  
+  if (!toggleBtn || !sunIcon || !moonIcon || !logoImg) {
+    return;
+  }
+  
+  // 저장된 다크 모드 설정 불러오기
+  const isDarkMode = localStorage.getItem('darkMode') === 'true';
+  if (isDarkMode) {
+    document.body.classList.add('dark-mode');
+    sunIcon.style.display = 'none';
+    moonIcon.style.display = 'block';
+    logoImg.src = logoImg.src.replace('logo.svg', 'logo-dark.svg');
+  }
+  
+  toggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const isNowDark = document.body.classList.contains('dark-mode');
+    
+    // 아이콘 변경
+    if (isNowDark) {
+      sunIcon.style.display = 'none';
+      moonIcon.style.display = 'block';
+      logoImg.src = logoImg.src.replace('logo.svg', 'logo-dark.svg');
+    } else {
+      sunIcon.style.display = 'block';
+      moonIcon.style.display = 'none';
+      logoImg.src = logoImg.src.replace('logo-dark.svg', 'logo.svg');
+    }
+    
+    // 설정 저장
+    localStorage.setItem('darkMode', isNowDark);
+  });
+}
+
+// 모바일 네비게이션 토글 기능 (일반 DOM용)
+function initMobileNavToggle() {
+  const toggleBtn = document.getElementById('mobileNavToggle');
+  const navList = document.getElementById('navList');
+  
+  if (!toggleBtn || !navList) {
+    return;
+  }
+  
+  toggleBtn.addEventListener('click', () => {
+    navList.classList.toggle('active');
+    toggleBtn.setAttribute('aria-expanded', navList.classList.contains('active'));
+  });
+  
+  // 네비게이션 링크 클릭 시 메뉴 닫기
+  const navLinks = navList.querySelectorAll('a');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      navList.classList.remove('active');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+}

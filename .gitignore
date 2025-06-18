@@ -42,3 +42,10 @@ build/
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Jekyll
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/
+Gemfile.lock

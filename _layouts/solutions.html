@@ -1,0 +1,84 @@
+---
+layout: default
+---
+
+<div class="solutions-page">
+  <div class="container">
+    <div class="page-header">
+      <h1>{{ page.title | default: "정보 올림피아드 문제 풀이" }}</h1>
+      <p>{{ page.description | default: "다양한 정보 올림피아드 대회의 문제와 해설을 확인하세요" }}</p>
+    </div>
+
+    <!-- 올림피아드 분류 선택 -->
+    <div class="olympiad-selector">
+      <h2>대회 분류 선택</h2>
+      <div class="selector-buttons" role="tablist" aria-label="올림피아드 분류">
+        {% assign olympiads = site.data.olympiads %}
+        {% assign sorted_keys = "apio,ioi,koi,koi-selection,usaco,joi,boi,baltoi" | split: "," %}
+        {% for key in sorted_keys %}
+          {% assign olympiad = olympiads[key] %}
+          {% if olympiad %}
+            <button class="selector-btn{% if forloop.first %} active{% endif %}" 
+                    data-olympiad="{{ key }}" 
+                    role="tab" 
+                    aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
+              {{ olympiad.title }}
+            </button>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- 올림피아드 섹션들 -->
+    {% for key in sorted_keys %}
+      {% assign olympiad = olympiads[key] %}
+      {% if olympiad %}
+        <section class="olympiad-section" id="{{ key }}-section"{% unless forloop.first %} style="display: none;"{% endunless %}>
+          <div class="olympiad-header">
+            <h2>{{ olympiad.title }}</h2>
+            <p>{{ olympiad.description }}</p>
+          </div>
+          
+          <div class="timeline-container" role="tabpanel" aria-labelledby="current-olympiad-title">
+            {% assign contests = olympiad.contests | sort: "year" | reverse %}
+            {% if contests.size > 0 %}
+              <div class="timeline">
+                {% for contest in contests %}
+                  <div class="timeline-item" 
+                       data-contest-id="{{ contest.contestId }}"
+                       role="button"
+                       tabindex="0"
+                       aria-label="{{ contest.title }} 문제 보기">
+                    <div class="timeline-year">{{ contest.year }}</div>
+                    <div class="timeline-title">{{ contest.title }}</div>
+                    {% if contest.location %}
+                      <div class="timeline-location">{{ contest.location }}</div>
+                    {% endif %}
+                    {% if contest.description %}
+                      <div class="timeline-description">{{ contest.description }}</div>
+                    {% endif %}
+                    {% if contest.problemCount %}
+                      <div class="timeline-problems-count">{{ contest.problemCount }}개 문제</div>
+                    {% endif %}
+                  </div>
+                {% endfor %}
+              </div>
+            {% else %}
+              <div class="timeline-empty">
+                <h3>데이터가 없습니다</h3>
+                <p>해당 대회의 정보를 찾을 수 없습니다.</p>
+              </div>
+            {% endif %}
+          </div>
+        </section>
+      {% endif %}
+    {% endfor %}
+
+    <!-- 숨겨진 데이터 (JavaScript에서 사용) -->
+    <script id="olympiad-data" type="application/json">
+      {{ site.data.olympiads | jsonify }}
+    </script>
+
+    {{ content }}
+  </div>
+</div>

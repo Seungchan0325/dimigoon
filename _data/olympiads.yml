@@ -1,0 +1,165 @@
+apio:
+  title: 'Asia-Pacific Informatics Olympiad'
+  description: '아시아-태평양 정보 올림피아드 대회별 문제 풀이'
+  contests:
+    - year: 2024
+      location: '인도네시아 자카르타'
+      title: 'APIO 2024'
+      contestId: 'apio-2024'
+      problemCount: 4
+      description: '아시아-태평양 지역 18개국이 참가한 대회'
+    - year: 2023
+      location: '이집트 카이로'
+      title: 'APIO 2023'
+      contestId: 'apio-2023'
+      problemCount: 4
+      description: '팬데믹 이후 첫 오프라인 개최'
+    - year: 2022
+      location: '온라인'
+      title: 'APIO 2022'
+      contestId: 'apio-2022'
+      problemCount: 3
+      description: '코로나19로 인한 온라인 개최'
+    - year: 2021
+      location: '온라인'
+      title: 'APIO 2021'
+      contestId: 'apio-2021'
+      problemCount: 3
+      description: '온라인 플랫폼을 통한 원격 참가'
+
+boi:
+  title: 'Balkan Olympiad in Informatics'
+  description: '발칸 정보 올림피아드 대회별 문제 풀이'
+  contests:
+    - year: 2024
+      location: '불가리아 소피아'
+      title: 'BOI 2024'
+      contestId: 'boi-2024'
+      problemCount: 6
+      description: '발칸 반도 12개국 참가'
+    - year: 2023
+      location: '루마니아 부쿠레슈티'
+      title: 'BOI 2023'
+      contestId: 'boi-2023'
+      problemCount: 6
+      description: '30주년 기념 대회'
+    - year: 2022
+      location: '세르비아 베오그라드'
+      title: 'BOI 2022'
+      contestId: 'boi-2022'
+      problemCount: 6
+      description: '발칸 지역 전통 올림피아드'
+
+baltoi:
+  title: 'Baltic Olympiad in Informatics'
+  description: '발트 정보 올림피아드 대회별 문제 풀이'
+  contests:
+    - year: 2024
+      location: '라트비아 리가'
+      title: 'BALTOI 2024'
+      contestId: 'baltoi-2024'
+      problemCount: 5
+      description: '발트 3국 연합 개최'
+    - year: 2023
+      location: '에스토니아 탈린'
+      title: 'BALTOI 2023'
+      contestId: 'baltoi-2023'
+      problemCount: 5
+      description: '북유럽 정보 올림피아드'
+
+ioi:
+  title: 'International Olympiad in Informatics'
+  description: '국제 정보 올림피아드 대회별 문제 풀이'
+  contests:
+    - year: 2024
+      location: '이집트 알렉산드리아'
+      title: 'IOI 2024'
+      contestId: 'ioi-2024'
+      problemCount: 6
+      description: '세계 최고 수준의 정보 올림피아드'
+    - year: 2023
+      location: '헝가리 세게드'
+      title: 'IOI 2023'
+      contestId: 'ioi-2023'
+      problemCount: 6
+      description: '35주년 기념 대회, 88개국 참가'
+    - year: 2022
+      location: '인도네시아 자카르타'
+      title: 'IOI 2022'
+      contestId: 'ioi-2022'
+      problemCount: 6
+      description: '팬데믹 이후 첫 오프라인 개최'
+
+joi:
+  title: 'Japanese Olympiad in Informatics'
+  description: '일본 정보 올림피아드 대회별 문제 풀이'
+  contests:
+    - year: 2024
+      location: '일본 도쿄'
+      title: 'JOI 2024'
+      contestId: 'joi-2024'
+      problemCount: 5
+      description: '일본 전국 고등학생 정보 올림피아드'
+    - year: 2023
+      location: '일본 오사카'
+      title: 'JOI 2023'
+      contestId: 'joi-2023'
+      problemCount: 5
+      description: '25주년 기념 대회'
+
+usaco:
+  title: 'USA Computing Olympiad'
+  description: '미국 컴퓨팅 올림피아드 대회별 문제 풀이'
+  contests:
+    - year: 2024
+      location: '미국 온라인'
+      title: 'USACO 2024'
+      contestId: 'usaco-2024'
+      problemCount: 12
+      description: '브론즈, 실버, 골드, 플래티넘 등급별 경연'
+    - year: 2023
+      location: '미국 온라인'
+      title: 'USACO 2023'
+      contestId: 'usaco-2023'
+      problemCount: 12
+      description: '월별 정기 개최되는 온라인 대회'
+
+koi-selection:
+  title: '국제정보올림피아드 대표학생 선발고사'
+  description: 'IOI 한국 대표 선발고사 문제 풀이'
+  contests:
+    - year: 2024
+      location: '한국 서울'
+      title: 'IOI 2024 한국 대표 선발고사'
+      contestId: 'koi-selection-2024'
+      problemCount: 4
+      description: 'IOI 2024 이집트 대회 대표 선발'
+    - year: 2023
+      location: '한국 서울'
+      title: 'IOI 2023 한국 대표 선발고사'
+      contestId: 'koi-selection-2023'
+      problemCount: 4
+      description: 'IOI 2023 헝가리 대회 대표 선발'
+
+koi:
+  title: '한국정보올림피아드'
+  description: '한국정보올림피아드(KOI) 대회별 문제 풀이'
+  contests:
+    - year: 2024
+      location: '한국 서울'
+      title: 'KOI 2024'
+      contestId: 'koi-2024'
+      problemCount: 8
+      description: '제31회 한국정보올림피아드'
+    - year: 2023
+      location: '한국 대전'
+      title: 'KOI 2023'
+      contestId: 'koi-2023'
+      problemCount: 8
+      description: '제30회 한국정보올림피아드'
+    - year: 2022
+      location: '한국 서울'
+      title: 'KOI 2022'
+      contestId: 'koi-2022'
+      problemCount: 8
+      description: '제29회 한국정보올림피아드'

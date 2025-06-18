@@ -1,0 +1,71 @@
+---
+layout: default
+---
+
+<div class="algorithms-page">
+  <div class="container">
+    <div class="page-header">
+      <h1>{{ page.title | default: "알고리즘 학습" }}</h1>
+      <p>{{ page.description | default: "단계별 알고리즘 학습 로드맵을 통해 체계적으로 알고리즘을 익혀보세요" }}</p>
+    </div>
+
+    <!-- 난이도 분류 선택 -->
+    <div class="tier-navigator">
+      <h2>난이도 분류 선택</h2>
+      <div class="tier-buttons" role="tablist" aria-label="난이도 분류">
+        {% assign tiers = "bronze,silver,gold,platinum,diamond,ruby" | split: "," %}
+        {% assign tier_names = "브론즈,실버,골드,플래티넘,다이아몬드,루비" | split: "," %}
+        {% for tier in tiers %}
+          {% assign tier_name = tier_names[forloop.index0] %}
+          <button class="tier-btn{% if forloop.first %} active{% endif %}" 
+                  data-tier="{{ tier }}" 
+                  role="tab" 
+                  aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
+            <img src="{{ "/assets/img/tier_" | append: tier | append: ".svg" | relative_url }}" 
+                 alt="{{ tier | capitalize }}" 
+                 class="tier-icon">
+            <span class="tier-name">{{ tier_name }}</span>
+          </button>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- 알고리즘 섹션들 -->
+    {% for tier in tiers %}
+      {% assign tier_name = tier_names[forloop.index0] %}
+      <section class="difficulty-section" id="{{ tier }}-section"{% unless forloop.first %} style="display: none;"{% endunless %}>
+        <div class="difficulty-title">
+          <h2>
+            <img src="{{ "/assets/img/tier_" | append: tier | append: ".svg" | relative_url }}" 
+                 alt="{{ tier | capitalize }}" 
+                 class="title-icon">
+            {{ tier_name }} ({{ tier | capitalize }})
+          </h2>
+        </div>
+        
+        {% assign tier_algorithms = site.data.algorithms[tier] %}
+        {% if tier_algorithms %}
+          {% for category in tier_algorithms %}
+            <div class="category-section">
+              <h3 class="category-title">{{ category[0] }}</h3>
+              <div class="category-content">
+                <div class="timeline">
+                  {% for algorithm in category[1] %}
+                    <div class="timeline-item">
+                      <h4><a href="{{ algorithm.link | default: "#" }}">{{ algorithm.title }}</a></h4>
+                      <p>{{ algorithm.description }}</p>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </section>
+    {% endfor %}
+
+    {{ content }}
+  </div>
+</div>
+
+<script src="{{ "/assets/js/pages/algorithms.js" | relative_url }}"></script>

@@ -1,0 +1,71 @@
+title: DimigoOn
+email: imchan0325@gmail.com
+description: >- # this means to ignore newlines until "baseurl:"
+  디미고 온라인 알고리즘 학습 플랫폼. 단계별 알고리즘 학습과 정보 올림피아드 문제 풀이를 제공합니다.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://dimigoon.github.io" # the base hostname & protocol for your site
+
+twitter_username: 
+github_username: seungchan0325
+instagram_username: dimigo_on
+
+# Build settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
+  parse_block_html: true
+  parse_span_html: true
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Collections
+collections:
+  algorithms:
+    output: true
+    permalink: /:collection/:name/
+  solutions:
+    output: true
+    permalink: /solutions/:path/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "algorithms"
+    values:
+      layout: "algorithm"
+  - scope:
+      path: ""
+      type: "solutions"
+    values:
+      layout: "solution"
+
+# Sass configuration
+sass:
+  sass_dir: _sass
+  style: compressed
+
+# Exclude from processing
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - scripts/
+
+# Include files
+include:
+  - _pages

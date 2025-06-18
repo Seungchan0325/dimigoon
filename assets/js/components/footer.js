@@ -1,11 +1,15 @@
 class SiteFooter extends HTMLElement {
   connectedCallback() {
+    // 현재 페이지의 경로 깊이를 계산하여 상대 경로 설정
+    const pathDepth = window.location.pathname.split('/').filter(part => part !== '').length;
+    const basePath = pathDepth <= 1 ? '' : '../'.repeat(pathDepth - 1);
+    
     this.innerHTML = `
       <footer>
         <div class="footer-content">
           <div class="footer-section footer-brand">
             <div class="footer-logo">
-              <img class="footer-logo-img" src="assets/img/logo.svg" alt="DimigoOn Logo">
+              <img class="footer-logo-img" src="${basePath}assets/img/logo.svg" alt="DimigoOn Logo">
               DimigoOn
             </div>
             <p class="footer-description">생각의 흐름을 키우는 알고리즘 학습 플랫폼</p>
@@ -25,20 +29,20 @@ class SiteFooter extends HTMLElement {
           <div class="footer-section footer-navigation">
             <h4 class="footer-title">바로가기</h4>
             <nav class="footer-nav">
-              <a href="algorithms.html">알고리즘 학습</a>
-              <a href="solutions.html">문제 풀이</a>
-              <a href="about.html">사이트 소개</a>
+              <a href="${basePath}algorithms.html">알고리즘 학습</a>
+              <a href="${basePath}solutions.html">문제 풀이</a>
+              <a href="${basePath}about.html">사이트 소개</a>
             </nav>
           </div>
           
           <div class="footer-section footer-resources">
             <h4 class="footer-title">알고리즘 난이도</h4>
             <nav class="footer-nav">
-              <a href="algorithms.html#bronze">Bronze</a>
-              <a href="algorithms.html#silver">Silver</a>
-              <a href="algorithms.html#gold">Gold</a>
-              <a href="algorithms.html#platinum">Platinum</a>
-              <a href="algorithms.html#diamond">Diamond</a>
+              <a href="${basePath}algorithms.html#bronze">Bronze</a>
+              <a href="${basePath}algorithms.html#silver">Silver</a>
+              <a href="${basePath}algorithms.html#gold">Gold</a>
+              <a href="${basePath}algorithms.html#platinum">Platinum</a>
+              <a href="${basePath}algorithms.html#diamond">Diamond</a>
             </nav>
           </div>
           
@@ -46,21 +50,21 @@ class SiteFooter extends HTMLElement {
             <h4 class="footer-title">연락처</h4>
             <div class="contact-info">
               <p class="contact-item">
-                <img class="contact-icon" src="assets/img/mail-icon.svg" alt="Email">
+                <img class="contact-icon" src="${basePath}assets/img/mail-icon.svg" alt="Email">
                 <a href="mailto:imchan0325@gmail.com">imchan0325@gmail.com</a>
               </p>
               <p class="contact-item">
-                <img class="contact-icon" src="assets/img/school-icon.svg" alt="School">
+                <img class="contact-icon" src="${basePath}assets/img/school-icon.svg" alt="School">
                 <span>한국디지털미디어고등학교</span>
               </p>
             </div>
             <div class="social-links">
               <a href="https://github.com/Seungchan0325" class="social-link" aria-label="GitHub">
-                <img class="social-link-img" src="assets/img/github-mark.svg" alt="GitHub">
+                <img class="social-link-img" src="${basePath}assets/img/github-mark.svg" alt="GitHub">
                 <span>GitHub</span>
               </a>
               <a href="https://www.instagram.com/dimigo_on/" class="social-link" aria-label="Instagram">
-                <img class="social-link-img" src="assets/img/instagram-mark.svg" alt="Instagram">
+                <img class="social-link-img" src="${basePath}assets/img/instagram-mark.svg" alt="Instagram">
                 <span>Instagram</span>
               </a>
             </div>
@@ -97,8 +101,11 @@ class SiteFooter extends HTMLElement {
   
   updateLogo(isDarkMode = document.body.classList.contains('dark-mode')) {
     const logoImg = this.querySelector('.footer-logo-img');
+    const pathDepth = window.location.pathname.split('/').filter(part => part !== '').length;
+    const basePath = pathDepth <= 1 ? '' : '../'.repeat(pathDepth - 1);
+    
     if (logoImg) {
-      logoImg.src = isDarkMode ? 'assets/img/logo-dark.svg' : 'assets/img/logo.svg';
+      logoImg.src = isDarkMode ? `${basePath}assets/img/logo-dark.svg` : `${basePath}assets/img/logo.svg`;
     }
   }
 }

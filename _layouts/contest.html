@@ -1,0 +1,84 @@
+---
+layout: default
+---
+
+<div class="contest-page">
+  <div class="container">
+    <!-- 네비게이션 브레드크럼 -->
+    <nav class="breadcrumb">
+      <a href="/solutions/">풀이 목록</a>
+      <span class="separator">›</span>
+      <a href="/solutions/{{ page.olympiad }}/">{{ page.olympiad | upcase }}</a>
+      <span class="separator">›</span>
+      <span class="current">{{ page.year }}년</span>
+    </nav>
+
+    <!-- 대회 헤더 -->
+    <div class="contest-header">
+      <div class="contest-meta">
+        <span class="olympiad-badge">{{ page.olympiad | upcase }}</span>
+        <span class="year-badge">{{ page.year }}년</span>
+        {% if page.location %}
+          <span class="location-badge">{{ page.location }}</span>
+        {% endif %}
+      </div>
+      
+      <h1>{{ page.title | default: page.olympiad | upcase }} {{ page.year }}</h1>
+      
+      {% if page.description %}
+        <p class="contest-description">{{ page.description }}</p>
+      {% endif %}
+    </div>
+
+    <!-- 문제 목록 -->
+    <div class="problems-section">
+      <h2>문제 목록</h2>
+      
+      {% assign contest_problems = site.solutions | where: "olympiad", page.olympiad | where: "year", page.year | sort: "problem_id" %}
+      
+      {% if contest_problems.size > 0 %}
+        <div class="problems-grid">
+          {% for problem in contest_problems %}
+            <a href="{{ problem.url }}" class="problem-card">
+              <div class="problem-card-inner">
+                <div class="problem-card-content">
+                  <div class="problem-card-header">
+                    <h3 class="problem-card-title">{{ problem.title }}</h3>
+                    <span class="problem-difficulty-badge difficulty-{{ problem.difficulty | downcase }}">{{ problem.difficulty }}</span>
+                  </div>
+                  
+                  <div class="problem-card-meta">
+                    <span class="problem-points">{{ problem.points }}점</span>
+                    <span class="problem-id">문제 {{ problem.problem_id }}</span>
+                  </div>
+                  
+                  {% if problem.tags %}
+                    <div class="problem-card-tags">
+                      {% for tag in problem.tags limit: 3 %}
+                        <span class="problem-tag">{{ tag }}</span>
+                      {% endfor %}
+                      {% if problem.tags.size > 3 %}
+                        <span class="problem-tag more-tags">+{{ problem.tags.size | minus: 3 }}</span>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                  
+                  <div class="problem-card-stats">
+                    {{ problem.problem_type | default: "프로그래밍 챌린지" }}
+                  </div>
+                </div>
+                
+                <div class="problem-card-arrow">→</div>
+              </div>
+            </a>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="no-problems">
+          <h3>준비 중입니다</h3>
+          <p>해당 대회의 문제 풀이가 아직 준비되지 않았습니다.</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

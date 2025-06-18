@@ -1,37 +1,27 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="DimigoOn - 생각의 흐름을 키우는 알고리즘 학습 플랫폼. 코딩테스트 준비부터 알고리즘 마스터까지 함께 성장하세요." />
-  <meta name="keywords" content="알고리즘, 코딩테스트, 프로그래밍, 한국디지털미디어고등학교, DimigoOn" />
-  <meta name="author" content="Seungchan Lee" />
-  <title>DimigoOn - 생각의 흐름을 키우는 알고리즘 학습 플랫폼</title>
-  <link rel="stylesheet" href="assets/css/styles.css" />
-</head>
-<body>
-  <site-header></site-header>
+---
+layout: default
+title: DimigoOn - 디미고 온라인 알고리즘 학습 플랫폼
+---
 
-  <div class="hero-section">
-    <h1 class="hero-slogan">생각의 흐름을 키다.</h1>
-    <section class="hero-hero-cards">
+<div class="hero-section">
+  <div class="hero-content">
+    <h1 class="hero-slogan">생각의 흐름을 키다</h1>
+    <div class="hero-hero-cards">
       <div class="hero-card">
-        <img class="hero-card-icon" src="assets/img/icon_light_bulb.svg">
-        <p>다양한 알고리즘을 학습하세요</p>
+        <img class="hero-card-icon" src="{{ "/assets/img/icon_stair.svg" | relative_url }}" alt="단계별 학습">
+        <h3 class="hero-card-title">단계별 학습</h3>
+        <p>브론즈부터 루비까지 체계적인 알고리즘 학습</p>
       </div>
       <div class="hero-card">
-        <img class="hero-card-icon" src="assets/img/icon_book.svg">
-        <p>다양한 문제의 풀이를 찾아보세요</p>
+        <img class="hero-card-icon" src="{{ "/assets/img/icon_book.svg" | relative_url }}" alt="문제 풀이">
+        <h3 class="hero-card-title">문제 풀이</h3>
+        <p>정보 올림피아드 기출 문제와 상세한 해설</p>
       </div>
       <div class="hero-card">
-        <img class="hero-card-icon" src="assets/img/icon_stair.svg">
-        <p>초급, 중급, 고급까지 다양한 알고리즘을 학습하세요</p>
+        <img class="hero-card-icon" src="{{ "/assets/img/icon_light_bulb.svg" | relative_url }}" alt="실력 향상">
+        <h3 class="hero-card-title">실력 향상</h3>
+        <p>체계적인 학습으로 코딩 실력 향상</p>
       </div>
-    </section>
+    </div>
   </div>
-
-  <site-footer></site-footer>
-
-  <script type="module" src="assets/js/main.js"></script>
-</body>
-</html>
+</div>

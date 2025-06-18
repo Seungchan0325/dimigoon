@@ -1,0 +1,63 @@
+---
+layout: default
+---
+
+<div class="olympiad-page">
+  <div class="container">
+    <!-- 네비게이션 브레드크럼 -->
+    <nav class="breadcrumb">
+      <a href="/solutions/">풀이 목록</a>
+      <span class="separator">›</span>
+      <span class="current">{{ page.title }}</span>
+    </nav>
+
+    <!-- 페이지 헤더 -->
+    <div class="page-header">
+      <h1>{{ page.title }}</h1>
+      <p>{{ page.description }}</p>
+    </div>
+
+    <!-- 연도별 타임라인 -->
+    <div class="timeline-container">
+      <h2>대회 연도별 보기</h2>
+      
+      {% comment %} 해당 올림피아드의 모든 연도 수집 {% endcomment %}
+      {% assign olympiad_solutions = site.solutions | where: "olympiad", page.olympiad_key %}
+      {% assign years = olympiad_solutions | map: "year" | uniq | sort | reverse %}
+      
+      {% if years.size > 0 %}
+        <div class="timeline">
+          {% for year in years %}
+            {% assign year_problems = olympiad_solutions | where: "year", year %}
+            <div class="timeline-item">
+              <div class="timeline-content">
+                <div class="timeline-year">{{ year }}년</div>
+                <div class="timeline-info">
+                  <h3><a href="/solutions/{{ page.olympiad_key }}/{{ year }}/">{{ page.olympiad_key | upcase }} {{ year }}</a></h3>
+                  <p>{{ year_problems.size }}개 문제</p>
+                  
+                  <!-- 문제 미리보기 -->
+                  <div class="problem-preview">
+                    {% for problem in year_problems limit: 3 %}
+                      <span class="problem-preview-item">{{ problem.title }}</span>
+                    {% endfor %}
+                    {% if year_problems.size > 3 %}
+                      <span class="more-problems">외 {{ year_problems.size | minus: 3 }}개</span>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="no-content">
+          <h3>준비 중입니다</h3>
+          <p>해당 올림피아드의 문제 풀이가 아직 준비되지 않았습니다.</p>
+        </div>
+      {% endif %}
+    </div>
+
+    {{ content }}
+  </div>
+</div>
