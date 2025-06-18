@@ -1,0 +1,119 @@
+---
+layout: default
+---
+
+<div class="tier-page">
+  <div class="container">
+    <!-- 페이지 헤더 -->
+    <div class="page-header">
+      <div class="tier-header">
+        <img src="{{ "/assets/img/tier_" | append: page.tier_key | append: ".svg" | relative_url }}" 
+             alt="{{ page.tier_key | capitalize }}" 
+             class="tier-header-icon">
+        <div class="tier-header-text">
+          <h1>{{ page.title }}</h1>
+          <p>{{ page.description }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 카테고리별 섹션 -->
+    <div class="category-selector">
+      <h2>분야 선택</h2>
+      <div class="selector-buttons" role="tablist" aria-label="알고리즘 분야">
+        {% assign tier_algorithms = site.algorithms | where: 'tier', page.tier_key %}
+        {% assign categories = tier_algorithms | map: 'category' | uniq | sort %}
+        {% for category in categories %}
+          <button class="selector-btn{% if forloop.first %} active{% endif %}" 
+                  data-category="{{ category }}" 
+                  role="tab" 
+                  aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
+            {% case category %}
+              {% when 'dp' %}동적계획법
+              {% when 'graph' %}그래프
+              {% when 'search' %}탐색
+              {% when 'sort' %}정렬
+              {% when 'string' %}문자열
+              {% when 'math' %}수학
+              {% when 'greedy' %}그리디
+              {% when 'tree' %}트리
+              {% else %}{{ category | capitalize }}
+            {% endcase %}
+          </button>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- 카테고리별 알고리즘 섹션들 -->
+    {% for category in categories %}
+      <section class="category-section" id="{{ category }}-section"{% unless forloop.first %} style="display: none;"{% endunless %}>
+        <div class="category-header">
+          <h2>
+            {% case category %}
+              {% when 'dp' %}동적계획법 (Dynamic Programming)
+              {% when 'graph' %}그래프 (Graph)
+              {% when 'search' %}탐색 (Search)
+              {% when 'sort' %}정렬 (Sort)
+              {% when 'string' %}문자열 (String)
+              {% when 'math' %}수학 (Math)
+              {% when 'greedy' %}그리디 (Greedy)
+              {% when 'tree' %}트리 (Tree)
+              {% else %}{{ category | capitalize }}
+            {% endcase %}
+          </h2>
+          <p>
+            {% case category %}
+              {% when 'dp' %}복잡한 문제를 작은 하위 문제로 나누어 해결하는 알고리즘 기법입니다.
+              {% when 'graph' %}정점과 간선으로 이루어진 그래프 구조를 다루는 알고리즘입니다.
+              {% when 'search' %}원하는 데이터를 효율적으로 찾는 알고리즘입니다.
+              {% when 'sort' %}데이터를 특정 순서로 정렬하는 알고리즘입니다.
+              {% when 'string' %}문자열을 처리하고 분석하는 알고리즘입니다.
+              {% when 'math' %}수학적 개념을 활용한 알고리즘입니다.
+              {% when 'greedy' %}매 순간 최선의 선택을 하는 알고리즘입니다.
+              {% when 'tree' %}계층적 구조를 가진 트리 자료구조를 다루는 알고리즘입니다.
+              {% else %}{{ category }} 관련 알고리즘들입니다.
+            {% endcase %}
+          </p>
+        </div>
+        
+        <div class="algorithm-timeline">
+          {% assign category_algorithms = tier_algorithms | where: 'category', category | sort: 'title' %}
+          {% if category_algorithms.size > 0 %}
+            <div class="timeline">
+              {% for algorithm in category_algorithms %}
+                <div class="timeline-item" 
+                     role="button"
+                     tabindex="0"
+                     aria-label="{{ algorithm.title }} 학습하기"
+                     onclick="location.href='{{ algorithm.url }}'">
+                  <div class="timeline-content">
+                    <h3 class="algorithm-title">{{ algorithm.title }}</h3>
+                    <p class="algorithm-description">{{ algorithm.description }}</p>
+                    {% if algorithm.tags %}
+                      <div class="algorithm-tags">
+                        {% for tag in algorithm.tags limit: 3 %}
+                          <span class="tag">{{ tag }}</span>
+                        {% endfor %}
+                        {% if algorithm.tags.size > 3 %}
+                          <span class="tag more">+{{ algorithm.tags.size | minus: 3 }}</span>
+                        {% endif %}
+                      </div>
+                    {% endif %}
+                  </div>
+                  <div class="timeline-arrow">→</div>
+                </div>
+              {% endfor %}
+            </div>
+          {% else %}
+            <div class="timeline-empty">
+              <h3>알고리즘이 없습니다</h3>
+              <p>해당 분야의 알고리즘이 아직 준비되지 않았습니다.</p>
+            </div>
+          {% endif %}
+        </div>
+      </section>
+    {% endfor %}
+
+    {{ content }}
+  </div>
+</div>

@@ -29,7 +29,7 @@ plugins:
 collections:
   algorithms:
     output: true
-    permalink: /:collection/:name/
+    permalink: /algorithms/:name/
   solutions:
     output: true
     permalink: /solutions/:path/

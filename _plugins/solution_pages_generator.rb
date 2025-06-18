@@ -12,6 +12,9 @@ module Jekyll
       
       # 대회별 페이지 생성
       generate_contest_pages(site)
+      
+      # 티어별 페이지 생성 (필요한 경우)
+      # generate_tier_pages(site)
     end
 
     private
@@ -197,6 +200,53 @@ module Jekyll
       
       content
     end
+    
+    # def generate_algorithms_index(site)
+    #   # Algorithms 메인 페이지 생성 - 현재 비활성화됨 (algorithms.html 파일로 대체)
+    #   page = SolutionPage.new(site, site.source, "algorithms", "index.html")
+    #   page.data['layout'] = 'algorithms'
+    #   page.data['title'] = '알고리즘 학습'
+    #   page.data['description'] = '단계별 알고리즘 학습 플랫폼'
+    #   page.content = ""
+    #   
+    #   site.pages << page
+    # end
+
+    # def generate_tier_pages(site)
+    #   # _algorithms에서 티어 목록 추출 - 현재 비활성화됨
+    #   tiers = site.collections['algorithms'].docs.map { |doc| doc.data['tier'] }.uniq.compact
+    #   
+    #   tiers.each do |tier|
+    #     # 티어 페이지 생성
+    #     page = SolutionPage.new(site, site.source, "algorithms", "#{tier}.html")
+    #     page.data['layout'] = 'tier'
+    #     page.data['title'] = get_tier_title(tier)
+    #     page.data['description'] = "#{get_tier_title(tier)} 난이도의 알고리즘 문제들"
+    #     page.data['tier_key'] = tier
+    #     page.content = ""
+    #     
+    #     site.pages << page
+    #   end
+    # end
+
+    # def get_tier_title(tier)
+    #   case tier
+    #   when 'bronze'
+    #     'Bronze'
+    #   when 'silver'
+    #     'Silver'
+    #   when 'gold'
+    #     'Gold'
+    #   when 'platinum'
+    #     'Platinum'
+    #   when 'diamond'
+    #     'Diamond'
+    #   when 'ruby'
+    #     'Ruby'
+    #   else
+    #     tier.capitalize
+    #   end
+    # end
   end
 
   class SolutionPage < Page

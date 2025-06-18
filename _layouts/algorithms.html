@@ -13,9 +13,9 @@ layout: default
     <div class="tier-navigator">
       <h2>난이도 분류 선택</h2>
       <div class="tier-buttons" role="tablist" aria-label="난이도 분류">
-        {% assign tiers = "bronze,silver,gold,platinum,diamond,ruby" | split: "," %}
+        {% assign tier_order = "bronze,silver,gold,platinum,diamond,ruby" | split: "," %}
         {% assign tier_names = "브론즈,실버,골드,플래티넘,다이아몬드,루비" | split: "," %}
-        {% for tier in tiers %}
+        {% for tier in tier_order %}
           {% assign tier_name = tier_names[forloop.index0] %}
           <button class="tier-btn{% if forloop.first %} active{% endif %}" 
                   data-tier="{{ tier }}" 
@@ -31,7 +31,8 @@ layout: default
     </div>
 
     <!-- 알고리즘 섹션들 -->
-    {% for tier in tiers %}
+    {% assign tiers = site.algorithms | map: 'tier' | uniq | sort %}
+    {% for tier in tier_order %}
       {% assign tier_name = tier_names[forloop.index0] %}
       <section class="difficulty-section" id="{{ tier }}-section"{% unless forloop.first %} style="display: none;"{% endunless %}>
         <div class="difficulty-title">
@@ -43,16 +44,18 @@ layout: default
           </h2>
         </div>
         
-        {% assign tier_algorithms = site.data.algorithms[tier] %}
-        {% if tier_algorithms %}
-          {% for category in tier_algorithms %}
+        {% assign tier_algorithms = site.algorithms | where: 'tier', tier %}
+        {% assign categories = tier_algorithms | map: 'category' | uniq | sort %}
+        {% if categories.size > 0 %}
+          {% for category in categories %}
             <div class="category-section">
-              <h3 class="category-title">{{ category[0] }}</h3>
+              <h3 class="category-title">{{ category | capitalize }}</h3>
               <div class="category-content">
                 <div class="timeline">
-                  {% for algorithm in category[1] %}
-                    <div class="timeline-item">
-                      <h4><a href="{{ algorithm.link | default: "#" }}">{{ algorithm.title }}</a></h4>
+                  {% assign category_algorithms = tier_algorithms | where: 'category', category | sort: 'title' %}
+                  {% for algorithm in category_algorithms %}
+                    <div class="timeline-item" onclick="location.href='{{ algorithm.url }}'">
+                      <h4><a href="{{ algorithm.url }}">{{ algorithm.title }}</a></h4>
                       <p>{{ algorithm.description }}</p>
                     </div>
                   {% endfor %}
@@ -60,6 +63,11 @@ layout: default
               </div>
             </div>
           {% endfor %}
+        {% else %}
+          <div class="no-algorithms">
+            <h3>알고리즘이 없습니다</h3>
+            <p>해당 난이도의 알고리즘이 아직 준비되지 않았습니다.</p>
+          </div>
         {% endif %}
       </section>
     {% endfor %}

@@ -1,0 +1,146 @@
+---
+layout: default
+---
+
+<div class="algorithms-index">
+  <div class="container">
+    <!-- 페이지 헤더 -->
+    <div class="page-header">
+      <h1>{{ page.title | default: "알고리즘 학습" }}</h1>
+      <p>{{ page.description | default: "단계별 알고리즘 학습 로드맵을 통해 체계적으로 알고리즘을 익혀보세요" }}</p>
+    </div>
+
+    <!-- 티어 목록 -->
+    <div class="tier-grid">
+      {% assign tiers = site.algorithms | map: 'tier' | uniq | sort %}
+      {% assign tier_order = "bronze,silver,gold,platinum,diamond,ruby" | split: "," %}
+      {% for tier in tier_order %}
+        {% if tiers contains tier %}
+          {% assign tier_algorithms = site.algorithms | where: 'tier', tier %}
+          {% assign categories = tier_algorithms | map: 'category' | uniq | sort %}
+          {% assign total_algorithms = tier_algorithms.size %}
+          
+          <a href="{{ tier }}.html" class="tier-card">
+            <div class="tier-card-header">
+              <div class="tier-info">
+                <img src="{{ "/assets/img/tier_" | append: tier | append: ".svg" | relative_url }}" 
+                     alt="{{ tier | capitalize }}" 
+                     class="tier-icon">
+                <h2>
+                  {% case tier %}
+                    {% when 'bronze' %}브론즈 (Bronze)
+                    {% when 'silver' %}실버 (Silver)
+                    {% when 'gold' %}골드 (Gold)
+                    {% when 'platinum' %}플래티넘 (Platinum)
+                    {% when 'diamond' %}다이아몬드 (Diamond)
+                    {% when 'ruby' %}루비 (Ruby)
+                    {% else %}{{ tier | capitalize }}
+                  {% endcase %}
+                </h2>
+              </div>
+              <div class="tier-stats">
+                <span class="algorithm-count">{{ total_algorithms }}개 알고리즘</span>
+                <span class="category-count">{{ categories.size }}개 분야</span>
+              </div>
+            </div>
+            
+            <div class="tier-card-body">
+              <p class="tier-description">
+                {% case tier %}
+                  {% when 'bronze' %}
+                    프로그래밍과 알고리즘의 기초를 다지는 단계입니다.
+                  {% when 'silver' %}
+                    기본적인 알고리즘과 자료구조를 익히는 단계입니다.
+                  {% when 'gold' %}
+                    고급 알고리즘 기법을 배우는 단계입니다.
+                  {% when 'platinum' %}
+                    복잡한 알고리즘과 최적화를 다루는 단계입니다.
+                  {% when 'diamond' %}
+                    최고 난이도의 알고리즘 문제를 푸는 단계입니다.
+                  {% when 'ruby' %}
+                    연구 수준의 고급 알고리즘을 다루는 단계입니다.
+                  {% else %}
+                    {{ tier | capitalize }} 난이도의 알고리즘들입니다.
+                {% endcase %}
+              </p>
+              
+              <div class="category-preview">
+                {% for category in categories limit: 3 %}
+                  {% assign category_algorithms = tier_algorithms | where: 'category', category %}
+                  <span class="category-badge">
+                    {% case category %}
+                      {% when 'dp' %}동적계획법
+                      {% when 'graph' %}그래프
+                      {% when 'search' %}탐색
+                      {% when 'sort' %}정렬
+                      {% when 'string' %}문자열
+                      {% when 'math' %}수학
+                      {% when 'greedy' %}그리디
+                      {% when 'tree' %}트리
+                      {% else %}{{ category }}
+                    {% endcase %}
+                    ({{ category_algorithms.size }}개)
+                  </span>
+                {% endfor %}
+                {% if categories.size > 3 %}
+                  <span class="more-categories">+{{ categories.size | minus: 3 }}개 분야</span>
+                {% endif %}
+              </div>
+            </div>
+            
+            <div class="tier-card-footer">
+              <span class="view-algorithms">알고리즘 보기 →</span>
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <!-- 최근 추가된 알고리즘 -->
+    <div class="recent-algorithms">
+      <h2>최근 추가된 알고리즘</h2>
+      <div class="algorithm-grid">
+        {% assign recent_algorithms = site.algorithms | sort: 'date' | reverse | limit: 6 %}
+        {% for algorithm in recent_algorithms %}
+          <a href="{{ algorithm.url }}" class="algorithm-card">
+            <div class="algorithm-card-header">
+              <img src="{{ "/assets/img/tier_" | append: algorithm.tier | append: ".svg" | relative_url }}" 
+                   alt="{{ algorithm.tier | capitalize }}" 
+                   class="algorithm-tier-icon">
+              <h3 class="algorithm-title">{{ algorithm.title }}</h3>
+            </div>
+            <div class="algorithm-meta">
+              <span class="algorithm-tier">{{ algorithm.tier | capitalize }}</span>
+              <span class="algorithm-category">
+                {% case algorithm.category %}
+                  {% when 'dp' %}동적계획법
+                  {% when 'graph' %}그래프
+                  {% when 'search' %}탐색
+                  {% when 'sort' %}정렬
+                  {% when 'string' %}문자열
+                  {% when 'math' %}수학
+                  {% when 'greedy' %}그리디
+                  {% when 'tree' %}트리
+                  {% else %}{{ algorithm.category }}
+                {% endcase %}
+              </span>
+            </div>
+            <p class="algorithm-description">{{ algorithm.description }}</p>
+            {% if algorithm.tags %}
+              <div class="algorithm-tags">
+                {% for tag in algorithm.tags limit: 2 %}
+                  <span class="tag">{{ tag }}</span>
+                {% endfor %}
+                {% if algorithm.tags.size > 2 %}
+                  <span class="tag more">+{{ algorithm.tags.size | minus: 2 }}</span>
+                {% endif %}
+              </div>
+            {% endif %}
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+
+    {{ content }}
+  </div>
+</div>
