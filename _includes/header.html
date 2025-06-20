@@ -1,7 +1,6 @@
 <header>
   <a href="{{ "/" | relative_url }}" class="header-logo">
-    <img class="header-logo-img" src="{{ "/assets/img/logo.svg" | relative_url }}" alt="DimigoOn Logo">
-    DimigoOn
+    {% include site-logo.html class="header-logo-img" alt="DimigoOn Logo" text="DimigoOn" %}
   </a>
   <div class="header-controls">
     <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="메뉴 토글">

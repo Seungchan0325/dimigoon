@@ -4,7 +4,8 @@
 .solutions-index,
 .olympiad-page,
 .contest-page,
-.solution-page {
+.solution-page,
+.algorithm-page {
   flex: 1;
   padding: 2rem 0;
   background: var(--bg-primary);
@@ -24,7 +25,8 @@
 .solutions-index .page-header,
 .olympiad-page .page-header,
 .contest-page .contest-header,
-.solution-page .problem-header {
+.solution-page .problem-header,
+.algorithm-page .problem-header {
   text-align: center;
   margin-bottom: 3rem;
 }
@@ -830,7 +832,7 @@
 .highlight table pre { margin: 0; }
 .highlight, .highlight .w {
   color: #24292f;
-  background-color: transparent;
+  background-color: #f6f8fa;
 }
 .highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kt, .highlight .kv {
   color: #cf222e;
@@ -2085,4 +2087,6 @@ body.dark-mode .code-copy-btn:hover {
 body.dark-mode .code-language-label {
   background: #58a6ff;
   color: #ffffff;
+}
+}
 }

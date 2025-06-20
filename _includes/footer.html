@@ -2,10 +2,9 @@
   <div class="footer-content">
     <!-- Footer Brand Section -->
     <div class="footer-brand">
-      <div class="footer-logo">
-        <img class="footer-logo-img" src="{{ "/assets/img/logo.svg" | relative_url }}" alt="DimigoOn Logo">
-        DimigoOn
-      </div>
+      <a href="{{ "/" | relative_url }}" class="footer-logo">
+        {% include site-logo.html class="footer-logo-img" alt="DimigoOn Logo" text="DimigoOn" %}
+      </a>
       <p class="footer-description">디미고 온라인 알고리즘 학습 플랫폼</p>
       <p class="footer-tagline">체계적인 학습으로 알고리즘 마스터하기</p>
       

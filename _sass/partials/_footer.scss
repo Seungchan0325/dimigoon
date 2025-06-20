@@ -1,14 +1,14 @@
 /* Footer Styles */
 
 footer {
-  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+  background: var(--bg-secondary);
   margin-top: auto;
   transition: all 0.3s ease;
   border-top: 1px solid var(--border-color);
 }
 
 body.dark-mode footer {
-  background: linear-gradient(135deg, var(--bg-tertiary) 0%, #0f172a 100%);
+  background: #2d2d2d;
   border-top: 1px solid var(--border-color);
 }
 
@@ -31,19 +31,18 @@ body.dark-mode footer {
   display: flex;
   align-items: center;
   font-family: "Kode Mono", monospace;
-  font-weight: 600;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: 700;
   margin-bottom: 20px;
-  color: inherit;
+  color: var(--text-primary);
   transition: color 0.3s ease;
 }
 
 .footer-logo-img {
-  width: 3rem;
-  height: 3rem;
+  width: 2.5rem;
+  height: 2.5rem;
   margin-right: 12px;
   object-fit: contain;
-  transition: opacity 0.3s ease;
 }
 
 .footer-description {

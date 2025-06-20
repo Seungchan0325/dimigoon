@@ -65,6 +65,7 @@ exclude:
   - vendor/gems/
   - vendor/ruby/
   - scripts/
+  - assets/css/styles.css
 
 # Include files
 include:

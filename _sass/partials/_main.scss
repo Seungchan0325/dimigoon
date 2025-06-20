@@ -1,5 +1,6 @@
-/* main page hero section */
+/* Main page styles - migrate from assets/css/main.css */
 
+/* Main page hero section */
 .hero-section {
   text-align: center;
   padding: 80px 20px;
@@ -58,10 +59,10 @@ body.dark-mode .hero-section > * {
 }
 
 body.dark-mode .hero-card {
-  background: rgba(30, 41, 59, 0.95);
+  background: rgba(45, 45, 45, 0.95);
   color: var(--text-primary);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(96, 165, 250, 0.2);
+  border: 1px solid rgba(64, 64, 64, 0.5);
 }
 
 .hero-card:hover {
@@ -72,7 +73,7 @@ body.dark-mode .hero-card {
 
 body.dark-mode .hero-card:hover {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-  border-color: var(--accent-primary);
+  border-color: #666666;
 }
 
 .hero-card-icon {

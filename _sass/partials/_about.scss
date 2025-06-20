@@ -1,7 +1,8 @@
-/* About Page Styles */
+/* About Page Styles - migrate from about.css */
 
+/* About Page Styles */
 .about-content {
-  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  background: var(--accent-primary);
   color: #ffffff;
   padding: 0;
   min-height: calc(100vh - 120px);
@@ -9,7 +10,7 @@
 }
 
 body.dark-mode .about-content {
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+  background: #1a1a1a;
 }
 
 .about-hero {
@@ -84,6 +85,7 @@ body.dark-mode .meaning-title {
   gap: 4rem;
 }
 
+/* Complexity Explanation Section */
 .complexity-explanation {
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -305,6 +307,7 @@ body.dark-mode .philosophy-item {
   opacity: 0.9;
 }
 
+/* Activities Section */
 .about-activities {
   padding: 80px 2rem;
   background: #ffffff;
@@ -402,6 +405,7 @@ body.dark-mode .activity-card p {
   color: var(--text-secondary);
 }
 
+/* Values Section */
 .about-values {
   padding: 80px 2rem;
   background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);

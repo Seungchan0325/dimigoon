@@ -60,7 +60,7 @@ body.dark-mode .header-logo {
 
 .dark-mode-toggle {
   background: none;
-  border: 2px solid var(--accent-primary);
+  border: 2px solid var(--text-secondary);
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -69,14 +69,15 @@ body.dark-mode .header-logo {
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  color: var(--accent-primary);
+  color: var(--text-secondary);
 }
 
 .dark-mode-toggle:hover {
-  background: var(--accent-primary);
-  color: white;
+  background: var(--text-primary);
+  color: var(--bg-primary);
   transform: scale(1.1);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border-color: var(--text-primary);
 }
 
 .dark-mode-toggle svg {
@@ -84,6 +85,19 @@ body.dark-mode .header-logo {
   height: 20px;
   stroke: currentColor;
   stroke-width: 2;
+}
+
+/* Dark mode specific styling for toggle button */
+body.dark-mode .dark-mode-toggle {
+  border-color: #666666;
+  color: #cccccc;
+}
+
+body.dark-mode .dark-mode-toggle:hover {
+  background: #ffffff;
+  color: #1a1a1a;
+  border-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
 }
 
 /* Mobile Navigation */
