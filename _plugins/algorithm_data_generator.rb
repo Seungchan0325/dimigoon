@@ -60,33 +60,38 @@ module Jekyll
     end
 
     def parse_algorithm_file(file_path, tier, category_key)
-      content = File.read(file_path)
-      
-      # Front matter 파싱
-      if content =~ /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
-        front_matter = YAML.safe_load($1)
+      begin
+        content = File.read(file_path)
         
-        filename = File.basename(file_path, '.md')
-        
-        {
-          'title' => front_matter['title'] || format_title_from_filename(filename),
-          'description' => front_matter['description'] || '자동 생성된 알고리즘 설명',
-          'link' => "/algorithms/#{tier}/#{category_key}/#{filename}/",
-          'difficulty' => front_matter['difficulty'],
-          'tags' => front_matter['tags'] || [],
-          'source_file' => file_path
-        }
-      else
-        # Front matter가 없는 경우
-        filename = File.basename(file_path, '.md')
-        
-        {
-          'title' => format_title_from_filename(filename),
-          'description' => '자동 생성된 알고리즘 설명',
-          'link' => "/algorithms/#{tier}/#{category_key}/#{filename}/",
-          'tags' => [],
-          'source_file' => file_path
-        }
+        # Front matter 파싱
+        if content =~ /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
+          front_matter = YAML.safe_load($1)
+          
+          filename = File.basename(file_path, '.md')
+          
+          {
+            'title' => front_matter['title'] || format_title_from_filename(filename),
+            'description' => front_matter['description'] || '자동 생성된 알고리즘 설명',
+            'link' => "/algorithms/#{tier}/#{category_key}/#{filename}/",
+            'difficulty' => front_matter['difficulty'],
+            'tags' => front_matter['tags'] || [],
+            'source_file' => file_path
+          }
+        else
+          # Front matter가 없는 경우
+          filename = File.basename(file_path, '.md')
+          
+          {
+            'title' => format_title_from_filename(filename),
+            'description' => '자동 생성된 알고리즘 설명',
+            'link' => "/algorithms/#{tier}/#{category_key}/#{filename}/",
+            'tags' => [],
+            'source_file' => file_path
+          }
+        end
+      rescue => e
+        Jekyll.logger.warn "Algorithm Generator", "Failed to parse #{file_path}: #{e.message}"
+        nil
       end
     end
 

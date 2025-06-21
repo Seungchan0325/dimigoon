@@ -41,43 +41,48 @@ module Jekyll
     def generate_algorithm_page(site, file_path, tier, category)
       filename = File.basename(file_path, '.md')
       
-      # 알고리즘 페이지 생성
+      # 알고리즘 페이지 생성 (계층 구조 유지)
       page = AlgorithmPage.new(site, site.source, "algorithms/#{tier}/#{category}", "#{filename}.html")
       
       # 원본 파일 내용 읽기
-      content = File.read(file_path)
-      
-      # Front matter 파싱
-      if content =~ /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
-        front_matter = YAML.safe_load($1)
-        markdown_content = content.sub(/\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m, '')
-      else
-        front_matter = {}
-        markdown_content = content
+      begin
+        content = File.read(file_path)
+        
+        # Front matter 파싱
+        if content =~ /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
+          front_matter = YAML.safe_load($1)
+          markdown_content = content.sub(/\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m, '')
+        else
+          front_matter = {}
+          markdown_content = content
+        end
+        
+        # 페이지 데이터 설정
+        page.data['layout'] = 'algorithm'
+        page.data['title'] = front_matter['title'] || format_title_from_filename(filename)
+        page.data['description'] = front_matter['description'] || '알고리즘 학습 자료'
+        page.data['tier'] = tier
+        page.data['category'] = category
+        page.data['difficulty'] = front_matter['difficulty']
+        page.data['tags'] = front_matter['tags'] || []
+        page.data['algorithm_page'] = true
+        
+        # 네비게이션 정보 추가
+        page.data['breadcrumb'] = [
+          { 'title' => '알고리즘', 'url' => '/algorithms/' },
+          { 'title' => tier.capitalize, 'url' => "/algorithms/##{tier}-section" },
+          { 'title' => format_category_name(category), 'url' => nil },
+          { 'title' => page.data['title'], 'url' => nil }
+        ]
+        
+        # 마크다운 콘텐츠를 페이지 콘텐츠로 설정
+        page.content = markdown_content
+        
+        site.pages << page
+        
+      rescue => e
+        Jekyll.logger.warn "Algorithm Generator", "Failed to generate page for #{file_path}: #{e.message}"
       end
-      
-      # 페이지 데이터 설정
-      page.data['layout'] = 'algorithm'
-      page.data['title'] = front_matter['title'] || format_title_from_filename(filename)
-      page.data['description'] = front_matter['description'] || '알고리즘 학습 자료'
-      page.data['tier'] = tier
-      page.data['category'] = category
-      page.data['difficulty'] = front_matter['difficulty']
-      page.data['tags'] = front_matter['tags'] || []
-      page.data['algorithm_page'] = true
-      
-      # 네비게이션 정보 추가
-      page.data['breadcrumb'] = [
-        { 'title' => '알고리즘', 'url' => '/algorithms/' },
-        { 'title' => tier.capitalize, 'url' => "/algorithms/##{tier}-section" },
-        { 'title' => format_category_name(category), 'url' => nil },
-        { 'title' => page.data['title'], 'url' => nil }
-      ]
-      
-      # 마크다운 콘텐츠를 페이지 콘텐츠로 설정
-      page.content = markdown_content
-      
-      site.pages << page
     end
 
     def format_title_from_filename(filename)
