@@ -2,6 +2,95 @@
 layout: default
 ---
 
+{% if page.algorithm_page %}
+<!-- 개별 알고리즘 페이지 -->
+<div class="algorithm-detail-page">
+  <div class="container">
+    <!-- 브레드크럼 네비게이션 -->
+    {% if page.breadcrumb %}
+    <nav class="breadcrumb" aria-label="페이지 경로">
+      <ol>
+        {% for item in page.breadcrumb %}
+        <li>
+          {% if item.url %}
+            <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
+          {% else %}
+            <span>{{ item.title }}</span>
+          {% endif %}
+          {% unless forloop.last %}<span class="separator">/</span>{% endunless %}
+        </li>
+        {% endfor %}
+      </ol>
+    </nav>
+    {% endif %}
+
+    <!-- 알고리즘 헤더 -->
+    <div class="algorithm-header">
+      <div class="tier-badge">
+        <img src="{{ "/assets/img/tier_" | append: page.tier | append: ".svg" | relative_url }}" 
+             alt="{{ page.tier | capitalize }}" 
+             class="tier-icon">
+        <span class="tier-name">{{ page.tier | capitalize }}</span>
+      </div>
+      
+      <h1>{{ page.title }}</h1>
+      
+      {% if page.description %}
+      <p class="algorithm-description">{{ page.description }}</p>
+      {% endif %}
+      
+      <!-- 태그 -->
+      {% if page.tags and page.tags.size > 0 %}
+      <div class="algorithm-tags">
+        {% for tag in page.tags %}
+        <span class="tag">{{ tag }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+      
+      <!-- 난이도 -->
+      {% if page.difficulty %}
+      <div class="difficulty-info">
+        <span class="difficulty-label">난이도:</span>
+        <span class="difficulty-value">{{ page.difficulty }}</span>
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- 알고리즘 내용 -->
+    <div class="algorithm-content">
+      {{ content | markdownify }}
+    </div>
+
+    <!-- 관련 알고리즘 -->
+    {% assign related_algorithms = site.data.algorithms[page.tier][page.category] %}
+    {% if related_algorithms and related_algorithms.size > 1 %}
+    <div class="related-algorithms">
+      <h3>같은 카테고리의 다른 알고리즘</h3>
+      <div class="related-list">
+        {% for algorithm in related_algorithms %}
+          {% unless algorithm.title == page.title %}
+          <div class="related-item">
+            <h4><a href="{{ algorithm.link | relative_url }}">{{ algorithm.title }}</a></h4>
+            <p>{{ algorithm.description }}</p>
+          </div>
+          {% endunless %}
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- 네비게이션 -->
+    <div class="algorithm-navigation">
+      <a href="/algorithms/#{{ page.tier }}-section" class="back-to-list">
+        ← {{ page.tier | capitalize }} 목록으로 돌아가기
+      </a>
+    </div>
+  </div>
+</div>
+
+{% else %}
+<!-- 기존 알고리즘 목록 페이지 -->
 <div class="algorithms-page">
   <div class="container">
     <div class="page-header">
@@ -80,3 +169,4 @@ layout: default
 </div>
 
 <script src="{{ "/assets/js/pages/algorithms.js" | relative_url }}"></script>
+{% endif %}
