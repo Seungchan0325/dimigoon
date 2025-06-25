@@ -15,6 +15,9 @@
 {% comment %} SEO 및 Open Graph 메타 태그 {% endcomment %}
 {% include meta-tags.html %}
 
+{% comment %} Google Search Console 소유권 확인 {% endcomment %}
+{% include google-search-console.html %}
+
 {% comment %} 스타일시트 {% endcomment %}
 <link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
 
@@ -31,3 +34,6 @@
 {%- if jekyll.environment == 'production' and site.google_analytics -%}
   {%- include google-analytics.html -%}
 {%- endif -%}
+
+{% comment %} 구조화된 데이터 (JSON-LD) {% endcomment %}
+{% include structured-data.html %}

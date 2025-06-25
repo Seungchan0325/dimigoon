@@ -1,0 +1,13 @@
+{% comment %}
+  Google Search Console 소유권 확인 메타 태그
+  
+  사용법:
+  {% include google-search-console.html %}
+  
+  설정:
+  _config.yml에서 google_site_verification 값을 설정하세요
+{% endcomment %}
+
+{%- if site.google_site_verification -%}
+<meta name="google-site-verification" content="{{ site.google_site_verification }}" />
+{%- endif -%}

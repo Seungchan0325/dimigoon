@@ -1,0 +1,80 @@
+{% comment %}
+  JSON-LD 구조화된 데이터
+  
+  사용법:
+  {% include structured-data.html %}
+{% endcomment %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "{{ site.title }}",
+  "description": "{{ site.description | strip_html | strip_newlines | escape }}",
+  "url": "{{ site.url }}",
+  {% if site.github_username %}
+  "sameAs": [
+    "https://github.com/{{ site.github_username }}"
+    {% if site.instagram_username %},"https://instagram.com/{{ site.instagram_username }}"{% endif %}
+  ],
+  {% endif %}
+  "author": {
+    "@type": "Organization",
+    "name": "{{ site.title }}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ site.title }}"
+  }
+}
+</script>
+
+{% if page.layout == 'algorithm' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{ page.title | escape }}",
+  "description": "{{ page.description | default: page.excerpt | strip_html | strip_newlines | escape }}",
+  "url": "{{ page.url | absolute_url }}",
+  "datePublished": "{{ page.date | default: site.time | date_to_xmlschema }}",
+  "author": {
+    "@type": "Organization",
+    "name": "{{ site.title }}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ site.title }}"
+  }
+}
+</script>
+{% endif %}
+
+{% if page.layout == 'solution' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{ page.title | escape }}",
+  "description": "{{ page.description | default: page.excerpt | strip_html | strip_newlines | escape }}",
+  "url": "{{ page.url | absolute_url }}",
+  "datePublished": "{{ page.date | default: site.time | date_to_xmlschema }}",
+  "author": {
+    "@type": "Organization",
+    "name": "{{ site.title }}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ site.title }}"
+  },
+  "about": [
+    {% for tag in page.tags %}
+    {
+      "@type": "Thing",
+      "name": "{{ tag }}"
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endif %}
