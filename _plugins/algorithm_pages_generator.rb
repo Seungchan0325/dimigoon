@@ -41,8 +41,8 @@ module Jekyll
     def generate_algorithm_page(site, file_path, tier, category)
       filename = File.basename(file_path, '.md')
       
-      # 알고리즘 페이지 생성 (계층 구조 유지)
-      page = AlgorithmPage.new(site, site.source, "algorithms/#{tier}/#{category}", "#{filename}.html")
+      # 알고리즘 페이지 생성 (index.html로 생성하여 /algorithms/silver/graph/dijkstra/ URL 지원)
+      page = AlgorithmPage.new(site, site.source, "algorithms/#{tier}/#{category}/#{filename}", "index.html")
       
       # 원본 파일 내용 읽기
       begin

@@ -72,8 +72,8 @@ module Jekyll
           # 대회 정보 설정
           contest_info = get_contest_info(olympiad, year, contest_data)
           
-          # 대회 페이지 생성
-          page = SolutionPage.new(site, site.source, "solutions/#{olympiad}", "#{year}.html")
+          # 대회 페이지 생성 (index.html로 생성하여 /solutions/koi/2023/ URL 지원)
+          page = SolutionPage.new(site, site.source, "solutions/#{olympiad}/#{year}", "index.html")
           page.data['layout'] = 'contest'
           page.data['title'] = contest_info[:title]
           page.data['olympiad'] = olympiad
