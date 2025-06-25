@@ -3,11 +3,11 @@ git_source(:github) {|repo| "https://github.com/#{repo}.git" }
 
 ruby "~> 3.2.0"
 
-# gem "jekyll", "~> 4.3.0"
+# 로컬 개발 및 GitHub Actions용 Jekyll (플러그인 지원)
+gem "jekyll", "~> 4.3.0"
 
-# If you want to use GitHub Pages, remove the "gem "jekyll"" above and
-# uncomment the line below. To upgrade, run `bundle update github-pages`.
-gem "github-pages", group: :jekyll_plugins
+# GitHub Pages 배포용 (GitHub Actions 사용 시 주석 처리)
+# gem "github-pages", group: :jekyll_plugins
 
 # If you have any plugins, put them here!
 group :jekyll_plugins do
