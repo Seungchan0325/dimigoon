@@ -13,7 +13,7 @@ instagram_username: dimigo_on
 
 # Google 서비스 설정
 google_analytics: # GA 추적 ID (예: G-XXXXXXXXXX)
-google_site_verification: cwJUoykt64F1jfXkUeA6rVGyCqlrhp3efpLJh-DWzOk # Search Console 확인 코드 (google-site-verification 메타 태그의 content 값)
+google_site_verification: thfolOdZq9HguKOR2NLmFzTqatIDZSlTvgpi8suIsz0 # Search Console 확인 코드 (google-site-verification 메타 태그의 content 값)
 
 # 빌드 설정
 markdown: kramdown
