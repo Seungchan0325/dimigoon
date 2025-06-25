@@ -1,0 +1,38 @@
+{% comment %}
+  브레드크럼 네비게이션 컴포넌트
+  
+  사용법:
+  {% include breadcrumb.html items=breadcrumb_items %}
+  
+  또는 직접 HTML 전달:
+  {% capture breadcrumb_content %}
+    <li><a href="/home">Home</a></li>
+    <li><span class="current">Current</span></li>
+  {% endcapture %}
+  {% include breadcrumb.html content=breadcrumb_content %}
+{% endcomment %}
+
+{% if include.content %}
+  <!-- 직접 HTML 컨텐츠가 전달된 경우 -->
+  <nav class="breadcrumb" aria-label="페이지 경로">
+    <ol>
+      {{ include.content }}
+    </ol>
+  </nav>
+{% elsif include.items and include.items.size > 0 %}
+  <!-- 배열이 전달된 경우 -->
+  <nav class="breadcrumb" aria-label="페이지 경로">
+    <ol>
+      {% for item in include.items %}
+      <li>
+        {% if item.url %}
+          <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
+        {% else %}
+          <span {% if forloop.last %}class="current"{% endif %}>{{ item.title }}</span>
+        {% endif %}
+        {% unless forloop.last %}<span class="separator">{% if include.separator %}{{ include.separator }}{% else %}/{% endif %}</span>{% endunless %}
+      </li>
+      {% endfor %}
+    </ol>
+  </nav>
+{% endif %}

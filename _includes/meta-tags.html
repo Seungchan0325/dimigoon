@@ -1,0 +1,48 @@
+{% comment %}
+  Open Graph 및 SEO 메타 태그 컴포넌트
+  
+  사용법:
+  {% include meta-tags.html %}
+{% endcomment %}
+
+{% comment %} 기본 SEO 메타 태그 {% endcomment %}
+<meta name="description" content="{{ page.description | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
+<meta name="keywords" content="{% if page.tags %}{{ page.tags | join: ', ' }}, {% endif %}알고리즘, 프로그래밍, 정보올림피아드, 코딩, DimigoOn">
+
+{% comment %} Open Graph 메타 태그 {% endcomment %}
+<meta property="og:title" content="{% if page.title %}{{ page.title | escape }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}">
+<meta property="og:description" content="{{ page.description | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
+<meta property="og:url" content="{{ page.url | prepend: site.url }}">
+<meta property="og:site_name" content="{{ site.title }}">
+<meta property="og:type" content="{% if page.layout == 'algorithm' or page.layout == 'solution' %}article{% else %}website{% endif %}">
+<meta property="og:locale" content="ko_KR">
+
+{% comment %} Twitter Card 메타 태그 {% endcomment %}
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{% if page.title %}{{ page.title | escape }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}">
+<meta name="twitter:description" content="{{ page.description | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
+
+{% comment %} 알고리즘/문제별 특화 메타 태그 {% endcomment %}
+{% if page.layout == 'algorithm' %}
+<meta name="article:section" content="알고리즘">
+{% if page.tier %}
+<meta name="article:tag" content="{{ page.tier | capitalize }}">
+{% endif %}
+{% if page.category %}
+<meta name="article:tag" content="{{ page.category }}">
+{% endif %}
+{% endif %}
+
+{% if page.layout == 'solution' %}
+<meta name="article:section" content="문제풀이">
+{% if page.olympiad %}
+<meta name="article:tag" content="{{ page.olympiad | upcase }}">
+{% endif %}
+{% if page.year %}
+<meta name="article:tag" content="{{ page.year }}년">
+{% endif %}
+{% endif %}
+
+{% comment %} 검색 엔진 최적화 {% endcomment %}
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="{{ page.url | prepend: site.url }}">

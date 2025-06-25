@@ -1,0 +1,19 @@
+{% comment %}
+  알고리즘 카드 컴포넌트
+  
+  사용법:
+  {% include algorithm-card.html algorithm=algorithm %}
+{% endcomment %}
+
+{% if include.algorithm %}
+{% assign algorithm = include.algorithm %}
+<div class="timeline-item algorithm-card">
+  <h4><a href="{{ algorithm.link | default: "#" | relative_url }}">{{ algorithm.title }}</a></h4>
+  {% if algorithm.description %}
+  <p>{{ algorithm.description }}</p>
+  {% endif %}
+  {% if algorithm.tags and algorithm.tags.size > 0 %}
+    {% include tags.html tags=algorithm.tags class="algorithm-tags-small" tag_class="tag-small" %}
+  {% endif %}
+</div>
+{% endif %}

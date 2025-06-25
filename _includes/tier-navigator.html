@@ -1,0 +1,26 @@
+{% comment %}
+  티어 네비게이터 컴포넌트
+  
+  사용법:
+  {% include tier-navigator.html %}
+{% endcomment %}
+
+<div class="tier-navigator">
+  <h2>난이도 분류 선택</h2>
+  <div class="tier-buttons" role="tablist" aria-label="난이도 분류">
+    {% assign tiers = "bronze,silver,gold,platinum,diamond,ruby" | split: "," %}
+    {% assign tier_names = "브론즈,실버,골드,플래티넘,다이아몬드,루비" | split: "," %}
+    {% for tier in tiers %}
+      {% assign tier_name = tier_names[forloop.index0] %}
+      <button class="tier-btn{% if forloop.first %} active{% endif %}" 
+              data-tier="{{ tier }}" 
+              role="tab" 
+              aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
+        <img src="{{ "/assets/img/tier_" | append: tier | append: ".svg" | relative_url }}" 
+             alt="{{ tier | capitalize }}" 
+             class="tier-icon">
+        <span class="tier-name">{{ tier_name }}</span>
+      </button>
+    {% endfor %}
+  </div>
+</div>

@@ -1,0 +1,30 @@
+{% comment %}
+  스크립트 섹션 컴포넌트
+  
+  사용법:
+  {% include scripts.html page_scripts=page_scripts %}
+  또는
+  {% include scripts.html page_scripts="/assets/js/pages/algorithms.js" %}
+{% endcomment %}
+
+{% comment %} 공통 스크립트 {% endcomment %}
+<script type="module" src="{{ "/assets/js/main.js" | relative_url }}"></script>
+<script src="{{ "/assets/js/code-blocks.js" | relative_url }}"></script>
+
+{% comment %} Feather Icons 초기화 {% endcomment %}
+<script>
+  feather.replace();
+</script>
+
+{% comment %} 페이지별 스크립트 (문자열 또는 배열) {% endcomment %}
+{% if include.page_scripts %}
+  {% if include.page_scripts.first %}
+    {% comment %} 배열인 경우 {% endcomment %}
+    {% for script in include.page_scripts %}
+      <script src="{{ script | relative_url }}"></script>
+    {% endfor %}
+  {% else %}
+    {% comment %} 문자열인 경우 {% endcomment %}
+    <script src="{{ include.page_scripts | relative_url }}"></script>
+  {% endif %}
+{% endif %}

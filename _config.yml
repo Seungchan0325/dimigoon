@@ -1,3 +1,4 @@
+# DimigoOn Jekyll 사이트 설정
 title: DimigoOn
 email: imchan0325@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
@@ -5,11 +6,12 @@ description: >- # this means to ignore newlines until "baseurl:"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://dimigoon.github.io" # the base hostname & protocol for your site
 
+# 소셜 미디어 설정
 twitter_username: 
 github_username: dimigoon
 instagram_username: dimigo_on
 
-# Build settings
+# 빌드 설정
 markdown: kramdown
 kramdown:
   input: GFM
@@ -20,12 +22,13 @@ kramdown:
   parse_block_html: true
   parse_span_html: true
 
+# Jekyll 플러그인
 plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
 
-# Collections
+# 컬렉션 설정
 collections:
   algorithms:
     output: true
@@ -34,7 +37,7 @@ collections:
     output: true
     permalink: /solutions/:path/
 
-# Defaults
+# 기본값 설정
 defaults:
   - scope:
       path: ""
@@ -47,12 +50,12 @@ defaults:
     values:
       layout: "solution"
 
-# Sass configuration
+# Sass 설정
 sass:
   sass_dir: _sass
   style: compressed
 
-# Exclude from processing
+# 빌드에서 제외할 파일들
 exclude:
   - .sass-cache/
   - .jekyll-cache/
@@ -65,7 +68,12 @@ exclude:
   - vendor/gems/
   - vendor/ruby/
   - scripts/
+  - README.md
+  - .git/
+  - .gitignore
+  - tools/
+  - REFACTORING_GUIDE.md
 
-# Include files
+# 페이지 포함 설정
 include:
   - _pages

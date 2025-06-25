@@ -10,25 +10,7 @@ layout: default
     </div>
 
     <!-- 난이도 분류 선택 -->
-    <div class="tier-navigator">
-      <h2>난이도 분류 선택</h2>
-      <div class="tier-buttons" role="tablist" aria-label="난이도 분류">
-        {% assign tiers = "bronze,silver,gold,platinum,diamond,ruby" | split: "," %}
-        {% assign tier_names = "브론즈,실버,골드,플래티넘,다이아몬드,루비" | split: "," %}
-        {% for tier in tiers %}
-          {% assign tier_name = tier_names[forloop.index0] %}
-          <button class="tier-btn{% if forloop.first %} active{% endif %}" 
-                  data-tier="{{ tier }}" 
-                  role="tab" 
-                  aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
-            <img src="{{ "/assets/img/tier_" | append: tier | append: ".svg" | relative_url }}" 
-                 alt="{{ tier | capitalize }}" 
-                 class="tier-icon">
-            <span class="tier-name">{{ tier_name }}</span>
-          </button>
-        {% endfor %}
-      </div>
-    </div>
+    {% include tier-navigator.html %}
 
     <!-- 알고리즘 섹션들 -->
     {% for tier in tiers %}
@@ -51,17 +33,7 @@ layout: default
               <div class="category-content">
                 <div class="timeline">
                   {% for algorithm in category[1] %}
-                    <div class="timeline-item">
-                      <h4><a href="{{ algorithm.link | default: "#" | relative_url }}">{{ algorithm.title }}</a></h4>
-                      <p>{{ algorithm.description }}</p>
-                      {% if algorithm.tags and algorithm.tags.size > 0 %}
-                      <div class="algorithm-tags-small">
-                        {% for tag in algorithm.tags %}
-                        <span class="tag-small">{{ tag }}</span>
-                        {% endfor %}
-                      </div>
-                      {% endif %}
-                    </div>
+                    {% include algorithm-card.html algorithm=algorithm %}
                   {% endfor %}
                 </div>
               </div>
@@ -79,4 +51,4 @@ layout: default
   </div>
 </div>
 
-<script src="{{ "/assets/js/pages/algorithms.js" | relative_url }}"></script>
+{% include scripts.html page_scripts="/assets/js/pages/algorithms.js" %}

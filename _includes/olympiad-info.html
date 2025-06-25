@@ -1,0 +1,33 @@
+{% comment %}
+  올림피아드 정보 표시 컴포넌트
+  
+  사용법:
+  {% include olympiad-info.html olympiad=page.olympiad %}
+{% endcomment %}
+
+{% if include.olympiad %}
+{% assign olympiad = include.olympiad %}
+<div class="olympiad-info">
+  {% case olympiad %}
+    {% when 'apio' %}
+      <span class="olympiad-icon">🌏</span>
+      <span class="olympiad-name">APIO (Asia-Pacific Informatics Olympiad)</span>
+      <span class="olympiad-desc">아시아-태평양 정보 올림피아드</span>
+    {% when 'koi' %}
+      <span class="olympiad-icon">🇰🇷</span>
+      <span class="olympiad-name">KOI (Korea Olympiad in Informatics)</span>
+      <span class="olympiad-desc">한국정보올림피아드</span>
+    {% when 'ioi' %}
+      <span class="olympiad-icon">🏆</span>
+      <span class="olympiad-name">IOI (International Olympiad in Informatics)</span>
+      <span class="olympiad-desc">국제정보올림피아드</span>
+    {% when 'usaco' %}
+      <span class="olympiad-icon">🇺🇸</span>
+      <span class="olympiad-name">USACO (USA Computing Olympiad)</span>
+      <span class="olympiad-desc">미국 컴퓨팅 올림피아드</span>
+    {% else %}
+      <span class="olympiad-icon">🏆</span>
+      <span class="olympiad-name">{{ olympiad | upcase }}</span>
+  {% endcase %}
+</div>
+{% endif %}

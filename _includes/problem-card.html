@@ -1,0 +1,35 @@
+{% comment %}
+  문제 카드 컴포넌트
+  
+  사용법:
+  {% include problem-card.html problem=problem %}
+{% endcomment %}
+
+{% if include.problem %}
+{% assign problem = include.problem %}
+<a href="{{ problem.url }}" class="problem-card">
+  <div class="problem-card-inner">
+    <div class="problem-card-content">
+      <div class="problem-card-header">
+        <h4 class="problem-card-title">{{ problem.title }}</h4>
+        {% if problem.difficulty %}
+        <span class="problem-difficulty-badge difficulty-{{ problem.difficulty | downcase }}">{{ problem.difficulty }}</span>
+        {% endif %}
+      </div>
+      
+      <div class="problem-card-meta">
+        {% if problem.points %}
+        <span class="problem-points">{{ problem.points }}점</span>
+        {% endif %}
+        {% if problem.problem_id %}
+        <span class="problem-id">문제 {{ problem.problem_id }}</span>
+        {% endif %}
+      </div>
+      
+      {% include tags.html tags=problem.tags class="problem-card-tags" tag_class="problem-tag" limit=2 %}
+    </div>
+    
+    <div class="problem-card-arrow">→</div>
+  </div>
+</a>
+{% endif %}

@@ -5,14 +5,30 @@ layout: default
 <div class="solution-page">
   <div class="container">
     <!-- 네비게이션 브레드크럼 -->
-    <nav class="breadcrumb">
-      <a href="/solutions/">풀이 목록</a>
-      <span class="separator">›</span>
-      <a href="/solutions/{{ page.olympiad }}/">{{ page.olympiad | upcase }}</a>
-      <span class="separator">›</span>
-      <a href="/solutions/{{ page.olympiad }}/{{ page.year }}/">{{ page.year }}년</a>
-      <span class="separator">›</span>
-      <span class="current">{{ page.title }}</span>
+    
+    {% assign olympiad_upper = page.olympiad | upcase %}
+    {% assign year_text = page.year | append: "년" %}
+    {% assign olympiad_url = "/solutions/" | append: page.olympiad | append: "/" %}
+    {% assign year_url = "/solutions/" | append: page.olympiad | append: "/" | append: page.year | append: "/" %}
+    
+    <nav class="breadcrumb" aria-label="페이지 경로">
+      <ol>
+        <li>
+          <a href="{{ "/solutions/" | relative_url }}">풀이 목록</a>
+          <span class="separator">›</span>
+        </li>
+        <li>
+          <a href="{{ olympiad_url | relative_url }}">{{ olympiad_upper }}</a>
+          <span class="separator">›</span>
+        </li>
+        <li>
+          <a href="{{ year_url | relative_url }}">{{ year_text }}</a>
+          <span class="separator">›</span>
+        </li>
+        <li>
+          <span class="current">{{ page.title }}</span>
+        </li>
+      </ol>
     </nav>
 
     <!-- 문제 헤더 -->
@@ -25,13 +41,7 @@ layout: default
       
       <h1 class="problem-title">{{ page.title }}</h1>
       
-      {% if page.tags %}
-      <div class="problem-tags">
-        {% for tag in page.tags %}
-          <span class="tag">{{ tag }}</span>
-        {% endfor %}
-      </div>
-      {% endif %}
+      {% include tags.html tags=page.tags class="problem-tags" %}
     </div>
 
     <!-- 문제 내용 -->
@@ -46,34 +56,7 @@ layout: default
         {% assign related_problems = site.solutions | where: "olympiad", page.olympiad | where: "year", page.year %}
         {% for problem in related_problems %}
           {% unless problem.url == page.url %}
-            <a href="{{ problem.url }}" class="problem-card">
-              <div class="problem-card-inner">
-                <div class="problem-card-content">
-                  <div class="problem-card-header">
-                    <h4 class="problem-card-title">{{ problem.title }}</h4>
-                    <span class="problem-difficulty-badge difficulty-{{ problem.difficulty | downcase }}">{{ problem.difficulty }}</span>
-                  </div>
-                  
-                  <div class="problem-card-meta">
-                    <span class="problem-points">{{ problem.points }}점</span>
-                    <span class="problem-id">문제 {{ problem.problem_id }}</span>
-                  </div>
-                  
-                  {% if problem.tags %}
-                    <div class="problem-card-tags">
-                      {% for tag in problem.tags limit: 2 %}
-                        <span class="problem-tag">{{ tag }}</span>
-                      {% endfor %}
-                      {% if problem.tags.size > 2 %}
-                        <span class="problem-tag more-tags">+{{ problem.tags.size | minus: 2 }}</span>
-                      {% endif %}
-                    </div>
-                  {% endif %}
-                </div>
-                
-                <div class="problem-card-arrow">→</div>
-              </div>
-            </a>
+            {% include problem-card.html problem=problem %}
           {% endunless %}
         {% endfor %}
       </div>

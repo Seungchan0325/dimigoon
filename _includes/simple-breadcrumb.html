@@ -1,0 +1,64 @@
+{% comment %}
+  간단한 브레드크럼 생성 매크로
+  
+  사용법:
+  {% include simple-breadcrumb.html 
+     home_title="홈" home_url="/"
+     level1_title="레벨1" level1_url="/level1/"
+     level2_title="레벨2" level2_url="/level1/level2/"
+     current_title="현재 페이지" %}
+{% endcomment %}
+
+<nav class="breadcrumb" aria-label="페이지 경로">
+  <ol>
+    {% if include.home_title %}
+    <li>
+      {% if include.home_url %}
+        <a href="{{ include.home_url | relative_url }}">{{ include.home_title }}</a>
+      {% else %}
+        <span>{{ include.home_title }}</span>
+      {% endif %}
+      {% if include.level1_title or include.current_title %}<span class="separator">›</span>{% endif %}
+    </li>
+    {% endif %}
+    
+    {% if include.level1_title %}
+    <li>
+      {% if include.level1_url %}
+        <a href="{{ include.level1_url | relative_url }}">{{ include.level1_title }}</a>
+      {% else %}
+        <span>{{ include.level1_title }}</span>
+      {% endif %}
+      {% if include.level2_title or include.current_title %}<span class="separator">›</span>{% endif %}
+    </li>
+    {% endif %}
+    
+    {% if include.level2_title %}
+    <li>
+      {% if include.level2_url %}
+        <a href="{{ include.level2_url | relative_url }}">{{ include.level2_title }}</a>
+      {% else %}
+        <span>{{ include.level2_title }}</span>
+      {% endif %}
+      {% if include.level3_title or include.current_title %}<span class="separator">›</span>{% endif %}
+    </li>
+    {% endif %}
+    
+    {% if include.level3_title %}
+    <li>
+      {% if include.level3_url %}
+        <a href="{{ include.level3_url | relative_url }}">{{ include.level3_title }}</a>
+      {% else %}
+        <span>{{ include.level3_title }}</span>
+      {% endif %}
+      {% if include.current_title %}<span class="separator">›</span>{% endif %}
+    </li>
+    {% endif %}
+    
+    {% if include.current_title %}
+    <li>
+      <span class="current">{{ include.current_title }}</span>
+    </li>
+    {% endif %}
+  </ol>
+</nav>

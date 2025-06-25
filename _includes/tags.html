@@ -1,0 +1,21 @@
+{% comment %}
+  태그 렌더링 컴포넌트
+  
+  사용법:
+  {% include tags.html tags=page.tags class="algorithm-tags" %}
+{% endcomment %}
+
+{% if include.tags and include.tags.size > 0 %}
+<div class="{{ include.class | default: 'tags' }}">
+  {% for tag in include.tags %}
+    {% assign tag_class = include.tag_class | default: 'tag' %}
+    {% if include.limit and forloop.index > include.limit %}
+      {% unless include.hide_overflow %}
+        <span class="{{ tag_class }} more-tags">+{{ include.tags.size | minus: include.limit }}</span>
+      {% endunless %}
+      {% break %}
+    {% endif %}
+    <span class="{{ tag_class }}">{{ tag }}</span>
+  {% endfor %}
+</div>
+{% endif %}
